@@ -1,0 +1,303 @@
+<div class="bg-lighter-grey innerContainer allBorder mt-5 center-block">
+
+  <div class="p-4">
+    <div class="row">
+      <div class="col-md-12 text-left">
+        <label class="font-weight-normal dashboardHeadingFont"> User Management Dashboard - </label>
+        <label class="font-weight-light font-italic dashboardHeadingFont">&nbsp; for last 30 days</label>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <div class="bgWhite boxShadow p-4 mr-2">
+          <div class="row">
+            <div class="col-md-7 text-left border-right">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="imgAddUser"></div>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-md-12">
+                  <label class="mb-0 font0-9em">User Profiles Added</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5 text-right">
+              <div class="row mb-n4">
+                <div class="col-md-12">
+                  <label class="pt-4 font2-5em">{{countAddition}}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label class="mb-0 font0-9em">OUT OF {{countTotal}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bgWhite boxShadow p-4 mr-2">
+          <div class="row">
+            <div class="col-md-7 text-left border-right">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="imgActiveUser"></div>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-md-12">
+                  <label class="mb-0 font0-9em">Active User Profiles</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5 text-right">
+              <div class="row mb-n4">
+                <div class="col-md-12">
+                  <label class="pt-4 font2-5em">{{countActive}}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label class="mb-0 font0-9em">OUT OF {{countTotal}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bgWhite boxShadow p-4 mr-2">
+          <div class="row">
+            <div class="col-md-7 text-left border-right">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="imgDeactiveUser"></div>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-md-12">
+                  <label class="mb-0 font0-9em">Deactivated User Profiles</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5 text-right">
+              <div class="row mb-n4">
+                <div class="col-md-12">
+                  <label class="pt-4 font2-5em">{{countDeactive}}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label class="mb-0 font0-9em">OUT OF {{countTotal}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="bgWhite boxShadow mr-2 p-4">
+          <div class="row">
+            <div class="col-md-10">
+              <label style="font-size: 1em; font-weight: bold;">ABNORMAL ACTIVITIES</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-striped fullwidth">
+                <thead>
+                  <tr class="d-flex">
+                    <th class="col-7 text-left">USERLOGIN</th>
+                    <th class="col-5 text-center">ACTIVITY</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class='d-flex'>
+                    <!-- <tr class='d-flex' *ngFor="let item of rolesData | search:'uRoleName,uNoModule,uNoPage':roleSearch | paginate: { itemsPerPage: itemPerPage, currentPage: p } | orderBy: order:reverse:'case-insensitive' let i=index"> -->
+                    <td class="col-7 text-left">John.Smith</td>
+                    <td class="col-5 text-center pointerCursor">
+                      <button type="button" class="btn btn-link p-0" data-toggle="modal"
+                        data-target="#permissionModal">50</button>
+                    </td>
+                  </tr>
+                  <tr class='d-flex'>
+                    <td class="col-7 text-left">Khan.Ahmed</td>
+                    <td class="col-5 text-center pointerCursor">
+                      <button type="button" class="btn btn-link p-0" data-toggle="modal"
+                        data-target="#permissionModal">30</button>
+                    </td>
+                  </tr>
+                  <tr class='d-flex'>
+                    <td class="col-7 text-left">Aliraza</td>
+                    <td class="col-5 text-center pointerCursor">
+                      <button type="button" class="btn btn-link p-0" data-toggle="modal"
+                        data-target="#permissionModal">25</button>
+                    </td>
+                  </tr>
+                  <tr class='d-flex'>
+                    <td class="col-7 text-left">Ahmed</td>
+                    <td class="col-5 text-center pointerCursor">
+                      <button type="button" class="btn btn-link p-0" data-toggle="modal"
+                        data-target="#permissionModal">10</button>
+                    </td>
+                  </tr>
+                  <tr class='d-flex'>
+                    <td class="col-7 text-left">Nawaz</td>
+                    <td class="col-5 text-center pointerCursor">
+                      <button type="button" class="btn btn-link p-0" data-toggle="modal"
+                        data-target="#permissionModal">10</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bgWhite boxShadow mr-2 p-4">
+          <div class="row">
+            <div class="col-md-12">
+              <label style="font-size: 1em; font-weight: bold;">Monthly User Management Trend</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 pb-0">
+              <div [chart]="Line_chart" (click)="pie_data()" style="height:335px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bgWhite boxShadow mr-2 p-4">
+          <div class="row">
+            <div class="col-md-10">
+              <label style="font-size: 1em; font-weight: bold;"> TOP USER</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 pb-0">
+              <table class="table table-striped fullwidth">
+                <thead>
+                  <tr class="d-flex">
+                    <th class="col-7 text-left">USERLOGIN</th>
+                    <th class="col-5 text-center">LOG DURATION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class='d-flex'>
+                    <!-- <tr class='d-flex' *ngFor="let item of rolesData | search:'uRoleName,uNoModule,uNoPage':roleSearch | paginate: { itemsPerPage: itemPerPage, currentPage: p } | orderBy: order:reverse:'case-insensitive' let i=index"> -->
+                    <td class="col-7 text-left">John.Smith</td>
+                    <td class="col-5 text-center">75%</td>
+                  </tr>
+                  <tr class='d-flex'>
+                    <td class="col-7 text-left">Khan.Ahmed</td>
+                    <td class="col-5 text-center">40%</td>
+                  </tr>
+                  <tr class='d-flex'>
+                    <td class="col-7 text-left">Aliraza</td>
+                    <td class="col-5 text-center">25%</td>
+                  </tr>
+                  <tr class='d-flex'>
+                    <td class="col-7 text-left">Ahmed</td>
+                    <td class="col-5 text-center">20%</td>
+                  </tr>
+                  <tr class='d-flex'>
+                    <td class="col-7 text-left">Nawaz</td>
+                    <td class="col-5 text-center">20%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+</div>
+<br />
+
+
+<!----------------------------------------------------------->
+<!----------------------------------------------------------->
+<!----------------- Start Modal Windows --------------------->
+<!----------------------------------------------------------->
+<!----------------------------------------------------------->
+
+
+<!-- Start Modal Window to add & update new user -->
+<div class="modal fade" id="permissionModal">
+
+  <!--start modal window dialog-->
+  <div class="modal-dialog shadow-lg-dark modal-md">
+    <!--start modal window contents -->
+    <div class="modal-content modal-bottom-border-blue">
+
+      <!--start user Modal Header -->
+      <div class="modal-header bg-skyBlue borderBlue5px">
+        <h4 class="dashboard-modal-title">ACTIVITY LOG</h4>
+        <div>
+          <button type="button" class="btn-close cursorPointer" data-dismiss="modal"></button>
+        </div>
+      </div>
+      <!--end user Modal Header -->
+
+      <!--start user Modal body -->
+      <div class="modal-body ">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped fullwidth">
+              <thead>
+                <tr class="d-flex">
+                  <th class="col-1 text-center">S#</th>
+                  <th class="col-6 text-left">USER NAME</th>
+                  <th class="col-5 text-center">ACTIVITY</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class='d-flex'>
+                  <!-- <tr class='d-flex' *ngFor="let item of rolesData | search:'uRoleName,uNoModule,uNoPage':roleSearch | paginate: { itemsPerPage: itemPerPage, currentPage: p } | orderBy: order:reverse:'case-insensitive' let i=index"> -->
+                  <td class="col-1 text-center">1</td>
+                  <td class="col-6 text-left">John.Smith</td>
+                  <td class="col-5 text-center">Updated</td>
+                </tr>
+                <tr class='d-flex'>
+                  <td class="col-1 text-center">2</td>
+                  <td class="col-6 text-left">John.Smith</td>
+                  <td class="col-5 text-center">Updated</td>
+                </tr>
+                <tr class='d-flex'>
+                  <td class="col-1 text-center">3</td>
+                  <td class="col-6 text-left">John.Smith</td>
+                  <td class="col-5 text-center">Updated</td>
+                </tr>
+                <tr class='d-flex'>
+                  <td class="col-1 text-center">4</td>
+                  <td class="col-6 text-left">John.Smith</td>
+                  <td class="col-5 text-center">Deleted</td>
+                </tr>
+                <tr class='d-flex'>
+                  <td class="col-1 text-center">5</td>
+                  <td class="col-6 text-left">John.Smith</td>
+                  <td class="col-5 text-center">Updated</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--end user Modal body -->
+    </div>
+    <!--end modal window contents -->
+  </div>
+  <!--end modal window dialog-->
+</div>
+<!-- End Modal Window to add & update new user -->

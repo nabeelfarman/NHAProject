@@ -1,0 +1,46 @@
+// .my-form-field.mat-form-field-appearance-legacy .mat-form-field-underline,
+//     .my-form-field.mat-form-field-appearance-legacy .mat-form-field-ripple,
+//     .my-form-field.mat-form-field-appearance-legacy.mat-focused
+//         .mat-form-field-underline,
+//     .my-form-field.mat-form-field-appearance-legacy.mat-focused
+//         .mat-form-field-ripple {
+//         background-color: red;
+//     }
+
+//     /** Overrides label color **/
+//     .my-form-field.mat-form-field-appearance-legacy .mat-form-field-label,
+//     .my-form-field.mat-form-field-appearance-legacy.mat-focused
+//         .mat-form-field-label {
+//         color: red;
+//     }
+
+//     /** Overrides caret & text color **/
+//     .my-form-field.mat-form-field-appearance-legacy .mat-input-element {
+//         caret-color: red;
+//         color: red;
+//     } 
+
+.my-form .mat-form-field-infix {
+  background-color: transparent;
+}
+
+.my-form .mat-select {
+  background-color: transparent;
+  color: #8b8b8b;
+}
+
+.my-form .mat-select-value {
+  color: #8b8b8b;
+}
+
+.my-form .mat-select-arrow {
+  color: #8b8b8b;
+}
+
+.my-form .mat-form-field span.mat-form-field-label-wrapper label {
+  color: #8b8b8b !important;
+}
+
+.my-form .mat-form-field.mat-focused span.mat-form-field-label-wrapper label {
+  color: #8b8b8b !important;
+}

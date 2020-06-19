@@ -1,0 +1,267 @@
+<!---------------------------------------------------------------------------------->
+<!---------------------------------------------------------------------------------->
+<!---------------- This is the User Role screen in which admin or  ----------------->
+<!---------------- super admin can make any role. Admin can also   ----------------->
+<!----------------            update & delete the role.            ----------------->
+<!---------------------------------------------------------------------------------->
+<!---------------------------------------------------------------------------------->
+
+
+
+<br />
+<!-- start menubar buttons -->
+<div class="myContainer">
+  <!--start top nav box shadow div-->
+  <div class="topnav boxShadow">
+    <!-- start heading & logo div-->
+    <div>
+
+      <span class="fa iconContainer">
+        <span class="fa icon-c-currency"></span>
+      </span>
+      <h1> {{sectHeading}} Section</h1>
+
+      <!-- <a class="pointerCursor" (click)="downloadExcel()">
+        <i class="fa fa-file-excel-o"></i>
+        Excel
+      </a>
+
+      <a class="pointerCursor" (click)="downloadCSV()">
+        <i class="fa fa-file-text-o"></i>
+        CSV
+      </a>
+
+      <a class="pointerCursor" (click)="downloadPDF()">
+        <i class="fa fa-file-pdf-o"></i>
+        PDF
+      </a>
+
+      <a class="pointerCursor" (click)="printDiv()">
+        <i class="fa fa-print"></i>
+        Print
+      </a> -->
+
+      <!--start add role permission button-->
+      <!-- <a class="pointerCursor" data-toggle="modal" data-target="#userRoleModal" (click)="clear()">
+        <i class="fa fa-plus-circle"></i>
+        ADD ROLE PERMISSIONS
+      </a> -->
+      <!--end add role permission button-->
+    </div>
+    <!-- end heading & logo div-->
+  </div>
+  <!--end top nav box shadow div-->
+</div>
+<!-- end menubar buttons -->
+<!---------- Try Template Code Starts ---------->
+
+<!--start myContainer div-->
+<div class="bgWhite myContainer allBorder">
+  <!-- <div class="myContainer"> -->
+  <div class="row" style="min-height: 35em !important;">
+    <!--left side panel-->
+    <div class="col-md-4">
+      <!--company row -->
+      <div class="row mt-3">
+        <div class="offset-md-1 col-sm-10">
+          <mat-form-field class="fullwidth">
+            <mat-select disableOptionCentering placeholder="Select Company" [(ngModel)]="ddlCompany"
+              (ngModelChange)="resetList(0);" required>
+              <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="ddlSearchCompany">
+              <mat-option *ngFor="let item of companyList | search:'orgName':ddlSearchCompany" [value]="item.orgId">
+                <table>
+                  <tr class='d-flex'>
+                    <td class="col-12">{{ item.orgName }}</td>
+                  </tr>
+                </table>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!--department title row -->
+      <div class="row">
+        <div class="offset-md-1 col-sm-10">
+          <mat-form-field class="fullwidth">
+            <input matInput [(ngModel)]="sectionName" placeholder="Section Title">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!--Department heading row -->
+      <div class="row">
+        <div class="offset-md-1 col-sm-10">
+          <div class="bottomBorder" style="padding: 18px 0 5px 0;">
+            Select Department
+          </div>
+        </div>
+      </div>
+
+      <!--Department detail row -->
+      <div class="row">
+        <div class="offset-md-1 col-sm-10">
+
+          <mat-radio-group [(ngModel)]="departmentId" (ngModelChange)="resetList(departmentId);">
+            <ul>
+              <li *ngFor="let item of departmentList | search:'cmpnyID':ddlCompany">
+                <mat-radio-button [value]="item.deptCd">{{item.deptName}}
+                </mat-radio-button>
+              </li>
+            </ul>
+          </mat-radio-group>
+
+        </div>
+      </div>
+
+      <!--branch heading row -->
+      <div class="row">
+        <div class="offset-md-1 col-sm-10">
+          <div class="bottomBorder" style="padding: 18px 0 5px 0;">
+            Select Branch
+          </div>
+        </div>
+      </div>
+
+      <!--branch detail row -->
+      <div class="row">
+        <div class="offset-md-1 col-sm-10">
+          <ul>
+            <li *ngFor="let item of locationList">
+              <mat-checkbox color="primary" (change)="selectBranch(item);" [checked]="item.status">{{item.locationName}}
+              </mat-checkbox>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!--buttons row -->
+      <div class="row">
+        <div class="offset-md-1 col-sm-10 text-right">
+          <button mat-raised-button class="btnClass" style="border-radius: 0;" (click)="clear();">
+            &nbsp;&nbsp;&nbsp;RESET&nbsp;&nbsp;&nbsp;
+          </button>
+          &nbsp;&nbsp;
+          <button mat-raised-button class="btnClass" style="border-radius: 0;" (click)="save();">
+            &nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;
+          </button>
+          <br /><br />
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!--right side panel-->
+    <div class="col-md-8">
+      <div class="h-100 bg-light-grey" style="border: 1px solid #efefef;">
+        <!--internal portion row-->
+        <div class="row mt-4 ml-4 mr-4 bgWhite shadow-lg-light" style="min-height: 32em !important;">
+
+          <div class="col-md-12">
+
+
+            <div class="myContainer">
+              <!--heading row -->
+              <div class="row">
+                <div class="col-md-12">
+                  <h5 class="mt-2 text-light-Blue">SECTION LIST</h5>
+                </div>
+              </div>
+
+              <!--heading row -->
+              <div class="row">
+                <div class="col-md-12">
+                  <table class="table fullwidth">
+                    <thead>
+                      <tr class="d-flex">
+                        <th [class.active]="order === 'sectionName'" (click)="setOrder('sectionName')"
+                          class="col-4 pointerCursor text-left ">
+                          Section Title
+                          <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+                          <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+                        </th>
+                        <th [class.active]="order === 'deptName'" (click)="setOrder('deptName')"
+                          class="col-4 pointerCursor text-left ">
+                          Department Title
+                          <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+                          <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+                        </th>
+                        <th class="col-2 text-center">Edit</th>
+                        <th class="col-2 text-center">Deactivate</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class='d-flex'
+                        *ngFor="let item of sectionList | search:'deptName':tblSearch | paginate: { itemsPerPage: itemPerPage, currentPage: p } | orderBy: order:reverse:'case-insensitive' let i=index">
+
+                        <td class="col-4">{{item.sectName}}</td>
+                        <td class="col-4">{{item.deptName}}</td>
+                        <td class="col-2 text-center">
+                          <span class="fa tableIcon pointerCursor" (click)="edit(item)">
+                            <span class="fa icon-u-edit" *ngIf="item.delFlag==0"></span>
+                            <span class="fa icon-u-edit-disable" *ngIf="item.delFlag==1"></span>
+                          </span>
+                        </td>
+                        <td class="col-2 text-center">
+                          <mat-slide-toggle (click)="generatePin(item)" (change)="change($event, item)"
+                            [checked]="item.delFlag"></mat-slide-toggle>
+                        </td>
+
+                      </tr>
+
+                    </tbody>
+                  </table>
+
+                </div>
+
+                <!-- Pagination Starts -->
+                <div class="col-md-12 text-right">
+                  <div class="paginationBox">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                  </div>
+                  <div class="paginationBox">
+                    <mat-form-field class="pagenateList">
+                      <mat-select [(ngModel)]="itemPerPage">
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="10">10</mat-option>
+                        <mat-option value="15">15</mat-option>
+                        <mat-option value="20">20</mat-option>
+                        <mat-option value="25">25</mat-option>
+                        <mat-option value="30">30</mat-option>
+                        <mat-option value="35">35</mat-option>
+                        <mat-option value="40">40</mat-option>
+                        <mat-option value="45">45</mat-option>
+                        <mat-option value="50">50</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="paginationBox">
+                    Item per page: &nbsp;&nbsp;
+                  </div>
+                </div>
+                <!-- Pagination Ends -->
+              </div>
+            </div>
+
+          </div>
+          <!--Start table Row-->
+
+          <!-- end table row -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- </div> -->
+  <!--Start 1st Row-->
+  <!--end 1st Row-->
+
+</div>
+<!--end myContainer div-->
+
+<!---------- Try Template Code Ends ------------>
+<br />

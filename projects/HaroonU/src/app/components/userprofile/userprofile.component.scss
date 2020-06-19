@@ -1,0 +1,67 @@
+//user profile page css start 
+
+//class for user management trend 
+.userTrendContainer {
+    border: 0px solid red;
+    margin: 30px;
+    height: 105px;
+}
+
+.userTrendContainer .box {
+    border: 0px solid red;
+    border-right: 2px solid #ccc;
+    height: 85px;
+    width: 170px;
+    padding: 38px 0 0 35px;
+    margin-top: 20px;
+    position: relative;
+    float: left;
+    font-family: Roboto-Regular;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.userTrendContainer .imgBox {
+    border-right: 2px solid #ebe0c7;
+    height: 105px;
+    padding-left: 155px;
+    padding-top: 24px;
+    line-height: 1;
+    position: relative;
+    font-family: Roboto-Light;
+    font-size: 26px;
+    color: #C1A76C;
+    float: left;
+    background: url('../../../assets/images/UserTrend.svg') no-repeat;
+    background-position-x: 40px;
+}
+
+.captionBoxB .triangle {
+    width: 0;
+	height: 0;
+	border-top: 15px solid transparent;
+    border-right: 15px solid #E5E5E5;
+    border-bottom: 15px solid transparent;
+    position: absolute;
+    margin-top: -43px;
+    margin-left: -29px;
+}
+
+.captionBoxB{
+    border: 0px solid red;
+    width: 100%;
+    padding: 15px;
+    background-color: #E5E5E5;
+}
+
+.captionBoxW{
+    border: 0px solid red;
+    width: 100%;
+    padding: 15px;
+    background-color: #F7F7F7;
+}
+
+label{
+    color: #778098;
+}
+

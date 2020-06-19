@@ -1,0 +1,94 @@
+<div>
+
+  <!--Address type cmbo bx row-->
+  <div class="row">
+     <div class="col-md-11">
+      <mat-form-field class="fullwidth">
+        <mat-select placeholder="Address Type *" [(ngModel)]="addressType">
+          <input type="text" placeholder="Search Address Type" [(ngModel)]="srchAdrs" class="form-control">
+          <mat-option *ngFor="let item of adrsTypeList | search:'addressTypeName': srchAdrs" [value]="item.addressTypeCd">
+            <table>
+              <tr class='d-flex'>
+                <td class="col-12">{{ item.addressTypeName }}</td>
+              </tr>
+            </table>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div> 
+
+    <div class="col-md-1 text-right nopadding" style="margin: 20px 0 0 -10px;">
+      <span class="pointerCursor fa fa-plus iconAdd" (click)="addAddress()"></span>
+    </div>
+
+  </div>
+
+
+  <!--Address  row-->
+  <div class="row">
+    <div class="col-md-11">
+      <mat-form-field class="fullwidth">
+        <textarea matInput [(ngModel)]="address" placeholder="Address *"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <!--Country cmbo bx row-->
+  <div class="row">
+    <div class="col-md-11">
+      <mat-form-field class="fullwidth">
+        <mat-select [(ngModel)]="country" placeholder="Country *">
+          <input type="text" placeholder="Search Country" [(ngModel)]="srchCntry" class="form-control">
+          <mat-option *ngFor="let item of cntryList | search:'cntryName': srchCntry" [value]="item.cntryCd">
+            <table>
+              <tr class='d-flex'>
+                <td class="col-12">{{ item.cntryName }}</td>
+              </tr>
+            </table>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <!--City cmbo bx row-->
+  <div class="row">
+    <div class="col-md-8">
+      <mat-form-field class="fullwidth">
+        <mat-select [(ngModel)]="city" placeholder="City *">
+          <input type="text" placeholder="Search City" [(ngModel)]="srchCity" class="form-control">
+          <mat-option *ngFor="let item of cityList | search:'districtName': srchCity" [value]="item.districtCd">
+            <table>
+              <tr class='d-flex'>
+                <td class="col-12">{{item.districtName}}</td>
+              </tr>
+            </table>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="fullwidth">
+        <input matInput [(ngModel)]="zipCode" placeholder="Zip Code">
+      </mat-form-field>
+    </div>
+  </div>
+
+    <div class="row" *ngFor=" let item of addressList; let i=index">
+      <div class="col-md-11" *ngIf="item.status != 2">
+        <div class="allBorder mt-1 p-2">
+          Address Type: {{item.addressTypeName}} <br/>
+          Address: {{item.address}}, {{item.districtName}}, {{item.cntryName}}.
+        </div>
+      </div>
+
+      <div class="col-md-1 text-right nopadding" *ngIf="item.status != 2" style="margin: 0 0 0 -15px;">
+        <span class="pointerCursor fa fa-times fa-lg iconRemove" (click)="removeAddress(i)"></span>
+      </div>
+
+    </div>
+
+</div>

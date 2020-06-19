@@ -1,0 +1,439 @@
+<mat-drawer-container class="example-container" autosize>
+  <!--Menu Side Bar For Hr -->
+
+
+  <div class="sidenavContainer"></div>
+
+
+
+  <div id="mySidenav" class="sidenav">
+
+    <div class="row">
+
+      <div class="col-md-12">
+        <button type="button" class="noneOutLine closeBtn" mat-flat-button (click)="closeNav()">
+          <div class="row">
+            <div class="col-md-6 text-left">
+              <a routerLink="home">
+                <img src="../assets/images/Ambit-Logo.svg" height="25px">
+              </a>
+            </div>
+            <div class="col-md-6 text-right">
+              <span class="fa fa-times" style="color:#4F6EB1;"></span>
+            </div>
+          </div>
+          <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="navH">
+          <li>
+            <a>
+              <span class="fa logo"><img src="../assets/images/Menu-search.svg" height="25px"></span>
+              <input class="ml-0 noneOutLine menuSearchBox" type="text" maxlength="32" placeholder="Search">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <mat-accordion>
+          <!--Configuration Menu Panel-->
+          <mat-expansion-panel class="rounded-0" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header class='mat-header-hover right-aligned-header'>
+              <mat-panel-title>
+                <div class="nav">
+                  <span class="fa logo">
+                    <img src="../assets/images/cofiguration.svg" width="30px">
+                  </span>
+                </div>
+              </mat-panel-title>
+              <mat-panel-description>
+                <div class="pt-2 ml-n3 text-left">
+                  Configuration
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ul class="nav ml-n4">
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink="Config/certificate">
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">Certificate</span>
+                </a>
+              </li>
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink="Config/degree">
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">Degree</span>
+                </a>
+              </li>
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink="Config/skill">
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">Skill</span>
+                </a>
+              </li>
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink="Config/experience">
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">Experience</span>
+                </a>
+              </li>
+            </ul>
+          </mat-expansion-panel>
+
+
+          <!--User Menu Panel-->
+          <mat-expansion-panel class="rounded-0" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header class='mat-header-hover right-aligned-header'>
+              <mat-panel-title>
+                <div class="nav">
+                  <span class="fa logo">
+                    <img src="../assets/images/User-gray.svg" width="28px">
+                  </span>
+                </div>
+              </mat-panel-title>
+              <mat-panel-description class="text-left">
+                <div class="pt-2 ml-n3 text-left">
+                  User
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ul class="nav ml-n4">
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink='UM/userDashboard'>
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">User Dashboard</span>
+                </a>
+              </li>
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink='UM/userProfile'>
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">User Profile</span>
+                </a>
+              </li>
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink="UM/userRole">
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">User Role</span>
+                </a>
+              </li>
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink="UM/userReport">
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">User Report</span>
+                </a>
+              </li>
+            </ul>
+          </mat-expansion-panel>
+
+
+          <!--Company Menu Panel-->
+          <mat-expansion-panel class="rounded-0" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header class='mat-header-hover right-aligned-header'>
+              <mat-panel-title>
+                <div class="nav">
+                  <span class="fa logo">
+                    <img src="../assets/images/Company.svg" width="30px">
+                  </span>
+                </div>
+              </mat-panel-title>
+              <mat-panel-description class="text-left">
+                <div class="pt-2 ml-n3 text-left">
+                  Company
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ul class="nav ml-n4">
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink='Comp/dashboard'>
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">Dashboard</span>
+                </a>
+              </li>
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink='Comp/newcmpany'>
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">New Company</span>
+                </a>
+              </li>
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink='Comp/editcmpany'>
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">Edit Company</span>
+                </a>
+              </li>
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink="Comp/branch">
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">New Branch</span>
+                </a>
+              </li>
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink="Comp/department">
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">Add Department</span>
+                </a>
+              </li>
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink="Comp/section">
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">Add Section</span>
+                </a>
+              </li>
+              <li routerLinkActive='active' (click)="closeNav()">
+                <a routerLink="Comp/currency">
+                  <!-- <span class="fa logo"><img src="../assets/images/Plus.svg"></span> -->
+                  <span class="text">New Currency</span>
+                </a>
+              </li>
+            </ul>
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!--Menu Top Bar  -->
+  <!--overflow-x: hidden;-->
+  <div class="example-sidenav-content" style="min-height: 97%; z-index: 100; overflow-x: hidden;">
+    <div *ngIf="hideDiv" class="row bgBlue boxShadow">
+      <!--Ambit Logo Button column -->
+      <div class="col-md-1 ml-n3" style="border:0px solid red; background-color: #E6E6E6;" (click)="openNav()">
+        <button type="button" class="noneOutLine menuButton" mat-flat-button>
+          <a routerLink="home">
+            <img src="../assets/images/Ambit-Logo.svg" height="25px" />
+          </a>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="fa fa-bars text-center" style="color:#4F6EB1;" (click)="openNav()"></span>
+        </button>
+      </div>
+
+      <!--empty column -->
+      <div class=" offset-md-5 col-md-1 text-right"></div>
+
+      <!--welcome column -->
+      <div class="col-md-3 text-right p-0">
+
+        <img src="../assets/images/EmpImages/{{empId}}.jpg" alt="" style="border-radius: 50%; margin-bottom: 3px;"
+          height="37" width="37" />
+
+        <div class="dropdown">
+          <button class="dropbtn pointerCursor">
+            <span class="text-capitalize">welcome! {{ logedInUserName }}</span> &nbsp;
+            <span class="fa fa-caret-down"></span>
+          </button>
+
+          <div class="dropdown-content pointerCursor">
+
+            <!-- <div class="btn" (click)=showBottom()>
+              <span class="fa fa-sitemap"></span>&nbsp;
+              <span> Modules</span>
+            </div> -->
+            <div class="btn" data-toggle="modal" data-target="#changePasWrdModal">
+              <span class="fa fa-key"></span>&nbsp;
+              <span>ChangePassword</span>
+            </div>
+            <!-- <div class="btn" (click)=genPin()>
+                  <span class="fa fa-key"></span>&nbsp;
+                  <span>gen pin</span>
+                </div> -->
+            <div class="btn" (click)="Logout()">
+              <span class="fa fa-sign-out"></span>&nbsp;
+              <span>Log out</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="border:0px solid red; padding: 0;">
+          <div class="col-md-2" style="border: 0px solid yellow; padding-right: 0;"></div>
+        </div>
+      </div>
+
+      <!--reports column -->
+      <div class="col-md-1 text-right border-left" style="border:0px solid yellow; padding: 0;">
+        <div class="btnReport">
+          <img src="../assets/images/Reports.svg" alt="" height="30px" />
+          &nbsp;<span style="font-size: 15px; font-family: Roboto-Light;">REPORTS</span>
+        </div>
+      </div>
+
+      <!--slider column -->
+      <div class="col-md-1 text-right">
+        <div class="btnSlider border-left">
+          <!-- <span class="fa fa-sliders"></span> -->
+          <img src="../assets/images/settings1.svg" alt="" height="30px" />
+        </div>
+      </div>
+    </div>
+
+    <ngx-spinner bdOpacity="0.9" bdColor="rgba(51,51,51,0.91)" size="medium" color="#ff871c"
+      type="ball-clip-rotate-multiple" fullScreen="true">
+      <p style="color: white;">Loading...</p>
+    </ngx-spinner>
+
+    <router-outlet> </router-outlet>
+  </div>
+
+  <!-- Start change password Modal Window -->
+  <div class="modal fade modal-forgot" id="changePasWrdModal">
+    <div class="modal-dialog shadow-lg-dark modal-lg modalPopup">
+      <div class="modal-content">
+        <!--Start Action Modal Header -->
+        <div class="modal-header">
+          <h4></h4>
+          <div>
+            <button type="button" class="btn-close cursorPointer" data-dismiss="modal"></button>
+          </div>
+        </div>
+        <!--End Action Modal Header -->
+
+        <!--start Modal body -->
+        <div class="modal-body">
+          <!--start 1st row-->
+          <div class="row">
+            <div class="offset-md-1 col-md-5 nopadding" style="border: 0px solid red;">
+              <p class="fontWhite">Change Password<br /></p>
+
+              <mat-form-field class="fullwidth my-form-field" appearance="legacy">
+                <mat-label class="inputLabel">
+                  Enter Current Password
+                </mat-label>
+                <input matInput id="float-input" type="password" size="32" [(ngModel)]="txtCrntPassword" autofocus />
+              </mat-form-field>
+
+              <!--start password row -->
+              <mat-form-field class="fullwidth my-form-field" appearance="legacy">
+                <mat-label class="inputLabel">
+                  Enter New Password
+                </mat-label>
+                <input matInput id="float-input" type="password" size="32" [(ngModel)]="txtNewPassword" />
+              </mat-form-field>
+              <!-- <mat-password-strength [password]="password.value" ></mat-password-strength> -->
+              <!--end password row-->
+
+              <!--start conform password row  style="margin-top: 5px;" -->
+              <mat-form-field class="fullwidth my-form-field" appearance="legacy">
+                <mat-label class="inputLabel">
+                  Confirm New Password
+                </mat-label>
+                <input matInput id="float-input" type="password" size="32" [(ngModel)]="txtCnfrmPassword" />
+              </mat-form-field>
+              <!-- <span class="ui-float-label">
+                  <input id="float-input" type="password" size="32" [(ngModel)]="txtCnfrmPassword" pInputText class="fullwidth noneOutLine"> 
+                  <label for="float-input">Confirm New Password</label>
+                </span> -->
+              <!--end conform password row -->
+
+              <!--buttons -->
+              <button mat-raised-button color="primary" class="buttonSquare btnBlueModal" (click)="changePassword()">
+                &nbsp;SAVE&nbsp;
+              </button>
+            </div>
+
+            <div class="offset-md-1 col-md-4 text-center" style="padding: 0 !important; border: 0px solid yellow;">
+              <img src="../../../assets/images/ResetPassword-Large.svg" alt="" width="100%" height="75%" />
+              <br /><br />
+              <h5 class="fontWhite"><b>CHANGE PASSWORD</b></h5>
+            </div>
+          </div>
+          <!--end 1st row-->
+
+          <br />
+        </div>
+        <!--end Modal body -->
+      </div>
+    </div>
+  </div>
+  <!-- End change password Modal Window -->
+
+  <!-- Start active user Modal Window -->
+  <div class="modal fade modal-forgot" id="generatePinModal">
+    <div class="modal-dialog shadow-lg-dark modal-lg modalPopup">
+      <div class="modal-content">
+        <!--Start Action Modal Header -->
+        <div class="modal-header">
+          <h4></h4>
+          <div>
+            <button type="button" class="btn-close cursorPointer" data-dismiss="modal"></button>
+          </div>
+        </div>
+        <!--End Action Modal Header -->
+
+        <!--start Modal body -->
+        <div class="modal-body">
+          <!--start 1st row-->
+          <div class="row">
+            <div class="offset-md-1 col-md-6">
+              <p class="fontWhite">
+                Hi {{ logedInUserName }}!<br />
+                It seems you need to activate this user profile, please enter
+                your PIN to proceed, if your PIN is already expired click
+                Generate PIN to receive new PIN via email.<br />
+              </p>
+
+              <div class="row">
+                <div class="col-md-10">
+                  <mat-form-field class="fullwidth my-form-field" appearance="legacy">
+                    <mat-label class="inputLabel">
+                      Enter PIN
+                    </mat-label>
+                    <input matInput id="float-input" type="password" size="32" [(ngModel)]="txtPin" />
+                  </mat-form-field>
+                  <!-- <div class="inputContainer">
+                    <span class="ui-float-label">
+                      <input id="float-input" [(ngModel)]="txtPin" type="password" size="32" pInputText class="fullwidth noneOutLine"> 
+                      <label for="float-input">Enter PIN</label>
+                    </span>
+                  </div> -->
+                </div>
+              </div>
+
+              <br />
+              <!--buttons -->
+              <button mat-raised-button color="primary" class="buttonSquare btnBlueModal" (click)="activePin()">
+                &nbsp; ACTIVATE &nbsp;
+              </button>
+              &nbsp;
+              <a class="fontWhite" style="text-decoration: underline; cursor: pointer;" (click)="sendPin()">Generate
+                PIN</a>
+              &nbsp;
+            </div>
+
+            <div class="col-md-4 text-center" style="padding: 0;">
+              <img src="../../../assets/images/ActivateUser-Large.svg" alt="" height="70%" />
+              <br /><br />
+              <h5 class="fontWhite"><b>DEACTIVATE USER</b></h5>
+            </div>
+          </div>
+          <!--end 1st row-->
+          <br />
+        </div>
+        <!--end Modal body -->
+      </div>
+    </div>
+  </div>
+  <!-- End active user Modal Window -->
+
+  <!-- copyright Starts -->
+  <div class="col-md-12">
+    <div class="copyRight" style="bottom:0px;">
+      Copyright &copy; InfoVative Solutions. All rights reserved.
+    </div>
+  </div>
+  <!-- copyright Ends -->
+</mat-drawer-container>

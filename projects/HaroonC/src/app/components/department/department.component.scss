@@ -1,0 +1,41 @@
+ul {
+  border: 0px solid green;
+  list-style-type: none;
+  padding: 5px 0 0 10px;
+}
+
+li {
+  border-bottom: 1px solid #cccccc;
+  padding: 10px 0 0 0;
+}
+
+h5 {
+  padding-top: 13px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+
+
+/////////////////////////////////////
+//////Slide toggle change color//////
+/////////////////////////////////////
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #FF6347;
+  /*replace with your color*/
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: #FFCCCB;
+  /*replace with your color*/
+}
+
+::ng-deep .mat-slide-toggle:not(.mat-checked):not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: green;
+  /*replace with your color*/
+}
+
+::ng-deep .mat-slide-toggle:not(.mat-checked):not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: lightgreen;
+  /*replace with your color*/
+}

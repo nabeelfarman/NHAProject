@@ -1,0 +1,269 @@
+<!---------------------------------------------------------------------------------->
+<!---------------------------------------------------------------------------------->
+<!---------------- This is the User Role screen in which admin or  ----------------->
+<!---------------- super admin can make any role. Admin can also   ----------------->
+<!----------------            update & delete the role.            ----------------->
+<!---------------------------------------------------------------------------------->
+<!---------------------------------------------------------------------------------->
+
+
+
+<br />
+<!-- start menubar buttons -->
+<div class="myContainer mat-elevation-z8 bgWhite">
+  <!--start top nav box shadow div-->
+  <div class="topnav boxShadow">
+    <!-- start heading & logo div-->
+    <div>
+
+      <span class="fa iconContainer">
+        <span class="fa icon-c-currency"></span>
+      </span>
+      <h1> Add Currency</h1>
+
+      <!-- <a class="pointerCursor" (click)="downloadExcel()">
+        <i class="fa fa-file-excel-o"></i>
+        Excel
+      </a>
+
+      <a class="pointerCursor" (click)="downloadCSV()">
+        <i class="fa fa-file-text-o"></i>
+        CSV
+      </a>
+
+      <a class="pointerCursor" (click)="downloadPDF()">
+        <i class="fa fa-file-pdf-o"></i>
+        PDF
+      </a>
+
+      <a class="pointerCursor" (click)="printDiv()">
+        <i class="fa fa-print"></i>
+        Print
+      </a> -->
+
+      <!--start add role permission button-->
+      <!-- <a class="pointerCursor" data-toggle="modal" data-target="#userRoleModal" (click)="clear()">
+        <i class="fa fa-plus-circle"></i>
+        ADD ROLE PERMISSIONS
+      </a> -->
+      <!--end add role permission button-->
+    </div>
+    <!-- end heading & logo div-->
+  </div>
+  <!--end top nav box shadow div-->
+</div>
+<!-- end menubar buttons -->
+<!---------- Try Template Code Starts ---------->
+
+<!--start myContainer div-->
+<div class="myContainer minHeight84">
+  <div class="row">
+    <div class="myContainer bgWhite">
+      <div class="m-4">
+        <div class="row">
+          <div class="col-md-3">
+            <mat-form-field class="fullwidth">
+              <mat-select placeholder="Select Company" [(ngModel)]="cmbCompany" disableOptionCentering required>
+                <mat-option *ngFor="let item of company" [value]="item.orgId">
+                  <table>
+                    <tr class='d-flex'>
+                      <td class="col-6">{{ item.orgName }}</td>
+                    </tr>
+                  </table>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="fullwidth">
+              <mat-select placeholder="Select Currency Type" [(ngModel)]="cmbCurrencyType" disableOptionCentering
+                required>
+                <mat-option *ngFor="let item of currencyType" [value]="item.currencyTypeCd">
+                  <table>
+                    <tr class='d-flex'>
+                      <td class="col-6">{{ item.currencyTypeName }}</td>
+                    </tr>
+                  </table>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="fullwidth">
+              <mat-select placeholder="Select Currency" [(ngModel)]="cmbCurrency" disableOptionCentering required>
+                <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchCurrency">
+                <mat-option *ngFor="let item of currency | search:'currencyName,currencyISOAlphaCd':searchCurrency"
+                  [value]="item.currencyCd">
+                  <table class="table">
+                    <tbody>
+                      <tr class='d-flex'>
+                        <td class="col-8 text-left">{{ item.currencyName }}</td>
+                        <td class="col-4 text-left">{{ item.currencyISOAlphaCd }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <div class="row mt-2">
+              <div class="col-sm-6 text-right">
+                <button mat-raised-button class="btnClass fullwidth" style="border-radius: 0;" (click)="clear()">
+                  &nbsp;&nbsp;&nbsp;RESET&nbsp;&nbsp;&nbsp;
+                </button>
+              </div>
+              <div class="col-sm-6">
+                <button mat-raised-button class="btnClass fullwidth" style="border-radius: 0;" (click)="save()">
+                  &nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Start 1st Row-->
+  <!--end 1st Row-->
+  <div class="row">
+    <!--Start table Row-->
+    <div class="myContainer" style="background-color: #efefef;">
+      <div class="bgWhite m-4" style="box-shadow: 0px 1px 12px 5px rgba(199,199,199,1);">
+        <div class="row ml-2">
+          <div class="col-md-12 mt-4">
+            <h5 class="text-light-Blue">CURRENCY LIST</h5>
+          </div>
+        </div>
+        <div class="row m-2">
+          <div class="col-md-12">
+            <table class="table table-striped fullwidth">
+              <thead>
+                <tr class="d-flex">
+                  <th [class.active]="order === 'currencyName'" (click)="setOrder('currencyName')"
+                    class="col-4 pointerCursor text-left ">
+                    Currency
+                    <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+                    <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+                  </th>
+                  <th [class.active]="order === 'currencyISOAlphaCd'" (click)="setOrder('currencyISOAlphaCd')"
+                    class="col-4 pointerCursor text-center">
+                    Currency Code
+                    <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+                    <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+                  </th>
+                  <th class="col-4 text-center">
+                    Active
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- <tr *ngFor="let item of userDetail | search:'UserName,Email': query" class='d-flex'> -->
+                <tr class='d-flex'
+                  *ngFor="let item of companyCurrency | search:'currencyName,currencyISOAlphaCd':tblSearch | paginate: { itemsPerPage: itemPerPage, currentPage: p } | orderBy: order:reverse:'case-insensitive' let i=index">
+                  <!-- <td class="col-1 text-center" hidden>{{item.erpRoleCd}}</td> -->
+                  <td class="col-4 text-left">{{item.currencyName}}</td>
+                  <td class="col-4 text-center">{{item.currencyISOAlphaCd}}</td>
+                  <td class="col-4 text-center">
+                    <mat-slide-toggle (click)="deleteTemp(item)" (change)="change($event, item)"
+                      [checked]="item.delFlag">
+                    </mat-slide-toggle>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+          <!-- Pagination Starts -->
+          <div class="col-md-12 text-right">
+            <div class="paginationBox">
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+            <div class="paginationBox">
+              <mat-form-field class="pagenateList">
+                <mat-select [(ngModel)]="itemPerPage">
+                  <mat-option value="1">1</mat-option>
+                  <mat-option value="2">2</mat-option>
+                  <mat-option value="10">10</mat-option>
+                  <mat-option value="15">15</mat-option>
+                  <mat-option value="20">20</mat-option>
+                  <mat-option value="25">25</mat-option>
+                  <mat-option value="30">30</mat-option>
+                  <mat-option value="35">35</mat-option>
+                  <mat-option value="40">40</mat-option>
+                  <mat-option value="45">45</mat-option>
+                  <mat-option value="50">50</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="paginationBox">
+              Item per page: &nbsp;&nbsp;
+            </div>
+          </div>
+          <!-- Pagination Ends -->
+
+        </div>
+      </div>
+    </div>
+    <!-- end table row -->
+  </div>
+</div>
+<!--end myContainer div-->
+
+<!---------- Try Template Code Ends ------------>
+<br />
+
+
+<!-- Hidden Table Starts for Excel and CSV files -->
+<!-- <igx-grid #excelDataContent [data]="excelDataList" [autoGenerate]="false" height="null" width="null" [hidden]="true">
+</igx-grid> -->
+<!-- Hidden Table Ends  for Excel and CSV files -->
+
+<!-- Hidden Table for Print and PDF files starts-->
+<div class="container mat-elevation-z8 printArea" id="printArea" #exportPDF [hidden]="true">
+  <div class="printDiv">
+
+    <!--Start heading table -->
+    <table>
+      <tr>
+        <td width="15%" style="border:none;">
+          <img src="../../../assets/images/logo.png" width="135px">
+        </td>
+
+        <td style="border:none;">
+          <div class="commonCss cssHeading">Logix Solutions</div>
+          <div class="commonCss cssAddress">Office #209, 2nd Floor Ahmed Plaza, Rawalpindi Road Fateh Jang.</div>
+          <div class="commonCss cssContact">Mobile: 0313-5300471, Ph. 057-2212704</div>
+        </td>
+      </tr>
+    </table>
+    <!--End heading table -->
+
+    <br /><br />
+
+    <!--Start table Row-->
+    <!-- <div class="row">
+      <table>
+        <thead>
+          <tr class="d-flex">
+            <th class="col-1 text-center">Sr. #</th>
+            <th class="col-4 text-left"> Role Name </th>
+            <th class="col-4 text-left"> No. of Modules </th>
+            <th class="col-3 text-left"> No. of Pages </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="d-flex" *ngFor="let user of rolesData | search:'uRoleName,uNoModule,uNoPage':roleSearch let
+            i=index">
+            <td class="col-1 text-center">{{i+1}}</td>
+            <td class="col-4 text-left">{{user.uRoleName}}</td>
+            <td class="col-4 text-left">{{user.uNoModule}}</td>
+            <td class="col-3 text-left">{{user.uNoPage}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>end table row -->
+  </div>
+</div>
+<!-- Hidden Table for Print and PDF files ends-->

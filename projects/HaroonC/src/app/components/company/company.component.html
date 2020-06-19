@@ -1,0 +1,1130 @@
+<br/>
+<div class="row myContainer">
+    <div class="col-md-12 npl npr">
+        <!--start top nav box shadow div-->
+        <div class="topnav boxShadow" style="border: 0;">
+            <!-- start heading & logo div-->
+            <div>
+
+            <span class="fa iconContainer">
+                <span class="fa icon-c-currency" ></span>
+            </span>
+            <h1> {{cmpnyHeadingLabel}} Company</h1>
+
+
+            <!--end add role permission button-->
+            </div> <!-- end heading & logo div-->
+        </div> <!--end top nav box shadow div-->
+    </div>
+</div>
+
+
+<br/>
+
+
+
+<div class="row myContainer" >
+
+
+    <!--Left Panel -->
+    <div class="col-md-4">
+
+        <!--heading row-->
+        <div class="row commonPenalCls">
+            <div class="col-md-12">
+
+                <!--heading -->
+                <div class="row" >
+                    <div class="col-md-12">
+                        <h5 class="text-light-Blue">COMPANY TYPE</h5>
+                        <hr/>
+                    </div>
+                </div>
+
+
+                <div >
+
+                    <!-- Company id -->
+                    <div class="row" *ngIf="companyEditMode">
+                        <div class="col-md-12">
+                            <mat-form-field class="fullwidth">
+                                <mat-select placeholder="Company Legal Name" [(ngModel)]="companyId" (ngModelChange)="edit()" disableOptionCentering required>
+                                    <mat-option *ngFor="let item of cmpnyList" [value]="item.companyId">
+                                        {{item.companyTitle}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Ownership row -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="fullwidth">
+                                <mat-select placeholder="Ownership Type" [(ngModel)]="cmbCType" (ngModelChange)="allowDiv()" disableOptionCentering required>
+                                    <!-- <mat-option *ngFor=" let item of types" [value]="item.BusinessTypeCd">
+                                        {{item.BusinessTypeName}}
+                                    </mat-option> -->
+                                    <mat-option *ngFor="let item of businessTypeList" [value]="item.businessTypeCd">
+                                        {{item.businessTypeName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <!-- Company Name row -->
+                    <div class="row" *ngIf="!companyEditMode">
+                        <div class="col-md-12">
+                            <mat-form-field class="fullwidth">
+                                <input matInput placeholder="Company's Legal Name" [(ngModel)]="companyName" required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <!-- Reg no or ntn row -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="fullwidth">
+                                <input matInput placeholder="Registration No or NTN" [(ngModel)]="cNtn" mask="000-0000000">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <!-- STRN no row -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="fullwidth">
+                                <input matInput placeholder="STRN" [(ngModel)]="cStrn" mask="000-000-000-0">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <!-- Business Type row -->
+                    <div class="row" style="display: none;">
+                        <div class="col-md-12">
+                            <mat-form-field class="fullwidth">
+                                <mat-select placeholder="Business Type" [(ngModel)]="cBusinessType" required disableOptionCentering>
+                                    <mat-option *ngFor="let item of businessTypeList" [value]="item.businessTypeCd">
+                                        {{item.businessTypeName}}
+                                    </mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <!-- Currency row -->
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <mat-form-field class="fullwidth">
+                                <input matInput placeholder="Number of Employees" [(ngModel)]="cEmployeQty">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <mat-form-field class="fullwidth">
+                                <mat-select placeholder="Currency" [(ngModel)]="cCurrency" disableOptionCentering>
+                                    <input type="text" placeholder="Search..." [(ngModel)]="srchCrncy" class="form-control">
+                                    <mat-option *ngFor="let item of crncyList | search:'currencyName': srchCrncy" [value]="item.currencyCd">
+                                        <table>
+                                            <tr class='d-flex'>
+                                                <td class="col-12">{{ item.currencyName }}</td>
+                                            </tr>
+                                        </table>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Logo row -->
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <img [src]="imageUrl" width="200">
+                        </div>
+
+                    </div>
+                    <br/><br/>
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <input class="position-absolute absolute-bottom" [(ngModel)]="imgFile" type="file" accept="image/*" (change)="onFileSelected($event)" />
+                        </div>
+
+                    </div>
+                    <br/>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Middle panel-->
+    <div class="col-md-4">
+
+        <div class="row">
+            <div class="offset-md-1 col-md-11 commonPenalCls">
+
+                <!--heading row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="text-light-Blue">COMPANY ADDRESS</h5>
+                        <hr>
+                    </div>
+                </div>
+
+                <div>
+
+                    <!--Address  row-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="fullwidth">
+                                <textarea matInput placeholder="Address" [(ngModel)]="cAddress"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <!--Country cmbo bx row-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="fullwidth">
+                                <mat-select placeholder="Country" [(ngModel)]="cCountry" disableOptionCentering required>
+                                    <input type="text" placeholder="Search..." [(ngModel)]="srchCntry" class="form-control">
+                                    <mat-option *ngFor="let item of cntryList | search:'cntryName': srchCntry" [value]="item.cntryCd">
+                                        <table>
+                                            <tr class='d-flex'>
+                                                <td class="col-12">{{ item.cntryName }}</td>
+                                            </tr>
+                                        </table>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <!--City cmbo bx row-->
+                    <div class="row">
+                        <div class="col-md-8">
+                            <mat-form-field class="fullwidth">
+                                <mat-select placeholder="City" [(ngModel)]="cCity" disableOptionCentering required>
+                                    <input type="text" placeholder="Search..." [(ngModel)]="srchCity" class="form-control">
+                                    <mat-option *ngFor="let item of cityList | search:'districtName': srchCity" [value]="item.districtCd">
+                                        <table>
+                                            <tr class='d-flex'>
+                                                <td class="col-12">{{ item.districtName }}</td>
+                                            </tr>
+                                        </table>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                            <mat-form-field class="fullwidth">
+                                <input matInput [(ngModel)]="cZipCode" placeholder="Zip Code">
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <!--company phone numbers-->
+        <div class="row">
+            <div class="offset-md-1 col-md-11 commonPenalCls">
+                <!--Contact number cmbo bx row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="fullwidth">
+                            <mat-select placeholder="Contact Type" [(ngModel)]="cContactType" disableOptionCentering>
+                                <mat-option *ngFor=" let item of cntctTypeList" [value]="item.teleTypeCd">
+                                    {{item.teleTypeName}}
+                                </mat-option>
+                            </mat-select>
+                            <span matPrefix class="pointerCursor fa fa-phone fa-lg iconPhone"></span>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-5 npl">
+                        <mat-form-field class="fullwidth">
+                            <input matInput [(ngModel)]="cContactNumber" placeholder="Number" mask="000-0000000">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-1 text-right nopadding" style="margin: 20px 0 0 -10px;">
+                        <span class="pointerCursor fa fa-plus iconAdd" (click)="addCompanyContact()"></span>
+                    </div>
+
+                </div>
+
+                <div class="innerContainer">
+                    <mat-radio-group>
+                        <div class="row" *ngFor=" let item of contactList; let i=index" >
+                            <div class="col-md-11" *ngIf="item.status != 2">
+                                <p>
+                                    <mat-radio-button value="{{i}}"></mat-radio-button>
+                                    {{item.contactNumber}}
+                                </p>
+                            </div>
+
+                            <div class="col-md-1 text-right nopadding" style="margin: 0 0 0 -20px;" *ngIf="item.status != 2">
+                                <span class="pointerCursor fa fa-times fa-lg iconRemove" (click)="removeContact(i)"></span>
+                            </div>
+                        </div>
+                    </mat-radio-group>
+                </div>
+
+
+
+                <!--Email row -->
+                <div class="row">
+                    <div class="col-md-11">
+                        <mat-form-field class="fullwidth">
+                            <input matInput [(ngModel)]="cEmailAdrs" placeholder="Email">
+                            <span matPrefix class="pointerCursor fa fa-envelope fa-lg iconEmail"></span>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-1 nopadding text-right" style="margin: 20px 0 0 -10px;">
+                        <span class="pointerCursor fa fa-plus iconAdd" (click)="addCompanyEmail()"></span>
+                    </div>
+
+                </div>
+
+                <div class="innerContainer">
+                    <mat-radio-group>
+                        <div class="row" *ngFor=" let item of emailList; let i=index" >
+                            <div class="col-md-11" *ngIf="item.status != 2">
+                                <p>
+                                    <mat-radio-button value="{{item.email}}"></mat-radio-button>
+                                    {{item.email}}
+                                </p>
+                            </div>
+
+                            <div class="col-md-1 text-right nopadding" style="margin: 0 0 0 -20px;" *ngIf="item.status != 2">
+                                <span class="pointerCursor fa fa-times fa-lg iconRemove" (click)="removeEmail(i)"></span>
+                            </div>
+
+                        </div>
+                    </mat-radio-group>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!--web and social media -->
+        <div class="row">
+            <div class="offset-md-1 col-md-11 commonPenalCls">
+                <!--heading row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>WEB AND SOCIAL MEDIA</h5>
+                        <hr/>
+                    </div>
+                </div>
+
+                <!-- web and social media row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <app-config-social-media></app-config-social-media>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!--Right Panel-->
+    <div class="col-md-4">
+
+        <div class="row">
+            <div class="offset-md-1 col-md-11 commonPenalCls" >
+
+
+                <!-- Solo proprietorship portion start -->
+                <div *ngIf="solePro">
+                    <!-- heading row -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="text-light-Blue">OWNERSHIP DETAIL</h5>
+                            <hr/>
+                        </div>
+                    </div>
+
+                    <div>
+                        <!-- Owner Name row -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field class="fullwidth">
+                                    <input matInput placeholder="Onwer Name" [(ngModel)]="oName" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <!-- cnic number row -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field class="fullwidth">
+                                    <input matInput placeholder="CNIC Number" [(ngModel)]="oCNIC" mask="00000-0000000-0" required >
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <!--Address row -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field class="fullwidth">
+                                    <textarea matInput placeholder="Address" [(ngModel)]="indvdAddress"></textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <!--Country row -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field class="fullwidth">
+                                    <mat-select placeholder="Country" [(ngModel)]="indvdCountry" required disableOptionCentering>
+                                        <input type="text" placeholder="Search..." [(ngModel)]="srchCntry" class="form-control">
+                                        <mat-option *ngFor="let item of cntryList | search:'cntryName': srchCntry" [value]="item.cntryCd">
+                                            <table>
+                                                <tr class='d-flex'>
+                                                    <td class="col-12">{{ item.cntryName }}</td>
+                                                </tr>
+                                            </table>
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <!--City Zip row -->
+                        <div class="row">
+                                <div class="col-md-8">
+                                    <mat-form-field class="fullwidth">
+                                        <mat-select placeholder="City" [(ngModel)]="indvdCity" required disableOptionCentering>
+                                            <input type="text" placeholder="Search..." [(ngModel)]="srchCity" class="form-control">
+                                            <mat-option *ngFor="let item of cityList | search:'districtName': srchCity" [value]="item.districtCd">
+                                                <table>
+                                                    <tr class='d-flex'>
+                                                        <td class="col-12">{{ item.districtName }}</td>
+                                                    </tr>
+                                                </table>
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <mat-form-field class="fullwidth">
+                                            <input matInput placeholder="Zip Code" [(ngModel)]="indvdZipCode">
+                                    </mat-form-field>
+                                </div>
+                        </div>
+
+                    </div>
+                </div> <!-- Solo proprietorship portion End -->
+
+
+
+                <!-- Partnership portion start -->
+                <div *ngIf="partner">
+                    <!-- heading row -->
+                    <div class="row">
+
+                        <div class="col-md-6 npr">
+                            <h5>PARTNERS LIST </h5>
+                            <hr/>
+                        </div>
+
+                        <div class="col-md-6 text-right npl" >
+                            <span class="btn-raised-ambit" data-toggle="modal" data-target="#partnerModal" (click)="clearIndividual();"> <i class="fa fa-plus-circle" style="color: #455FA9;"></i> add Partner</span>
+                            <hr style="margin-top: 2px;">
+                        </div>
+                        <hr/>
+
+                    </div>
+
+                    <div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <table class="table table-striped fullwidth">
+                                    <tbody>
+                                        <tr *ngFor="let item of indvdDetailList; let i=index" class='d-flex'>
+                                            <td *ngIf="item.status != 2" class="col-8">{{item.name}}</td>
+                                            <td *ngIf="item.status != 2" class="col-2 text-center">
+
+                                                <span class="fa tableIcon pointerCursor" data-toggle="modal" data-target="#partnerModal" (click)="editIndividual(item)">
+                                                    <span class="fa icon-u-edit" ></span>
+                                                </span>
+
+                                            </td>
+                                            <td *ngIf="item.status != 2" class="col-2 text-center">
+
+                                                <span class="fa tableIcon pointerCursor" (click)="deleteIndividual(i)" >
+                                                    <span class="fa icon-u-delete" ></span>
+                                                </span>
+
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Partnership portion End -->
+
+
+
+                <!-- Public Company portion start -->
+                <div *ngIf="ppCom">
+
+                    <div class="row">
+                        <div class="col-md-6" style="padding-right: 0;">
+                            <h5>DIRECTORS LIST</h5>
+                            <hr/>
+                        </div>
+
+                        <div class="col-md-6 text-right" style="padding-left: 0;">
+                            <span class="btn-raised-ambit" data-toggle="modal" data-target="#directorModal" (click)="clearIndividual();"> <i class="fa fa-plus-circle" style="color: #455FA9;"></i> add director</span>
+                            <hr style="margin-top: 2px;">
+                        </div>
+                    </div>
+
+                    <div >
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <table class="table table-striped fullwidth">
+                                    <tbody>
+                                        <tr *ngFor="let item of indvdDetailList; let i=index" class='d-flex'>
+                                            <td *ngIf="item.status != 2" class="col-8">{{item.name}}</td>
+                                            <td *ngIf="item.status != 2" class="col-2 text-center">
+
+                                                <span class="fa tableIcon pointerCursor" data-toggle="modal" data-target="#directorModal" (click)="editIndividual(item)">
+                                                    <span class="fa icon-u-edit" ></span>
+                                                </span>
+
+                                            </td>
+                                            <td *ngIf="item.status != 2" class="col-2 text-center">
+                                                <span class="fa tableIcon pointerCursor" (click)="deleteIndividual(i)" >
+                                                    <span class="fa icon-u-delete" ></span>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            
+
+                        </div>
+                    </div>
+                </div> <!-- Public Company portion End -->
+
+
+            </div>
+        </div>
+
+
+
+
+        <div class="row" *ngIf="solePro">
+            <div class="offset-md-1 col-md-11 commonPenalCls">
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="fullwidth">
+                            <mat-select placeholder="Contact Type" [(ngModel)]="indvdContactType" disableOptionCentering>
+                                <mat-option *ngFor=" let item of cntctTypeList" [value]="item.teleTypeCd">
+                                    {{item.teleTypeName}}
+                                </mat-option>
+                            </mat-select>
+                            <span matPrefix class="pointerCursor fa fa-phone fa-lg iconPhone"></span>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-5 npl">
+                        <mat-form-field class="fullwidth">
+                            <input matInput [(ngModel)]="indvdContactNumber" placeholder="Number" mask="000-0000000">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-1 text-right nopadding" style="margin: 20px 0 0 -10px;">
+                        <span class="pointerCursor fa fa-plus iconAdd" (click)="addIndvdContact()"></span>
+                    </div>
+
+                </div>
+
+                
+                <div class="innerContainer">
+                    <mat-radio-group>
+                        <div class="row" *ngFor=" let item of indvdContactList; let i=index" >
+                            <div class="col-md-11">
+                                <p>
+                                <mat-radio-button value="{{i}}"></mat-radio-button>
+                                    {{item.contactNumber}}
+                                </p>
+                            </div>
+
+                            <div class="col-md-1 text-right nopadding" style="margin: 0 0 0 -20px;">
+                                <span class="pointerCursor fa fa-times fa-lg iconRemove" (click)="removeIndvdContact(i)"></span>
+                            </div>
+
+                        </div>
+                    </mat-radio-group>
+                </div>
+
+
+
+                <!--Email row -->
+                <div class="row">
+                    <div class="col-md-11">
+                        <mat-form-field class="fullwidth">
+                            <input matInput [(ngModel)]="indvdEmailAdrs" placeholder="Email">
+                            <span matPrefix class="pointerCursor fa fa-envelope fa-lg iconEmail"></span>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-1 nopadding text-right" style="margin: 20px 0 0 -10px;">
+                        <span class="pointerCursor fa fa-plus iconAdd" (click)="addIndvdEmail()"></span>
+                    </div>
+
+                </div>
+
+                <div class="innerContainer">
+                    <mat-radio-group>
+                        <div class="row" *ngFor=" let item of indvdEmailList; let i=index" >
+                            <div class="col-md-11">
+                                <p>
+                                    <mat-radio-button value="{{i}}"></mat-radio-button>
+                                    {{item.email}}
+                                </p>
+                            </div>
+
+                            <div class="col-md-1 text-right nopadding" style="margin: 0 0 0 -20px;">
+                                <span class="pointerCursor fa fa-times fa-lg iconRemove" (click)="removeIndvdEmail(i)"></span>
+                            </div>
+
+                        </div>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="offset-md-1 col-md-11 text-right npr">
+                <button mat-raised-button class="btnClass" style="border-radius: 0;" (click)="clear()">
+                    &nbsp;&nbsp;&nbsp;RESET&nbsp;&nbsp;&nbsp;
+                </button>
+
+                &nbsp;&nbsp;&nbsp;
+
+                <button mat-raised-button class="btnClass" style="border-radius: 0;" (click)="save()">
+                    &nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<br/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Start Add Director Modal Window -->
+<div class="modal fade" id="directorModal">
+    <div class="modal-dialog shadow-lg-dark modal-lg modalCmpnyPro">
+        <div class="modal-content modal-bottom-border-blue">
+
+            <!--start Modal Header -->
+            <div class="modal-header bg-skyBlue borderBlue5px">
+                <h4 class="modal-title">Add Director</h4>
+                <button type="button" class="btn-close cursorPointer" data-dismiss="modal"></button>
+            </div>
+            <!--end Modal Header -->
+
+
+
+            <!--start Modal body -->
+            <div class="modal-body mr-3 ml-3 mb-3">
+
+                <!-- Title row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="fullwidth">
+                            <input matInput placeholder="Title" [(ngModel)]="dTitle" required>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!-- Share Percentage row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="fullwidth">
+                            <input matInput placeholder="Share Percentage" [(ngModel)]="dShare" >
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!-- Director name row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="fullwidth">
+                            <input matInput placeholder="Director's Name" [(ngModel)]="dName" >
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!-- CNIC row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="fullwidth">
+                            <input matInput placeholder="CNIC Number" [(ngModel)]="dCNIC" mask="00000-0000000-0" >
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!--Address row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="fullwidth">
+                            <textarea matInput placeholder="Address" [(ngModel)]="indvdAddress"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!--Country row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="fullwidth">
+                            <mat-select placeholder="Country" [(ngModel)]="indvdCountry" required disableOptionCentering>
+                                <input type="text" placeholder="Search..." [(ngModel)]="srchCntry" class="form-control">
+                                <mat-option *ngFor="let item of cntryList | search:'cntryName': srchCntry" [value]="item.cntryCd">
+                                    <table>
+                                        <tr class='d-flex'>
+                                            <td class="col-12">{{ item.cntryName }}</td>
+                                        </tr>
+                                    </table>
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!--City Zip row -->
+                <div class="row">
+                        <div class="col-md-8">
+                            <mat-form-field class="fullwidth">
+                                <mat-select placeholder="City" [(ngModel)]="indvdCity" required disableOptionCentering>
+                                    <input type="text" placeholder="Search..." [(ngModel)]="srchCity" class="form-control">
+                                    <mat-option *ngFor="let item of cityList | search:'districtName': srchCity" [value]="item.districtCd">
+                                        <table>
+                                            <tr class='d-flex'>
+                                                <td class="col-12">{{ item.districtName }}</td>
+                                            </tr>
+                                        </table>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                            <mat-form-field class="fullwidth">
+                                    <input matInput placeholder="Zip Code" [(ngModel)]="indvdZipCode">
+                            </mat-form-field>
+                        </div>
+                </div>
+
+                <!-- contact row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="fullwidth">
+                                    <mat-select placeholder="Contact Type" [(ngModel)]="indvdContactType" disableOptionCentering>
+                                        <mat-option *ngFor=" let item of cntctTypeList" [value]="item.teleTypeCd">
+                                            {{item.teleTypeName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <span matPrefix class="pointerCursor fa fa-phone fa-lg iconPhone"></span>
+                                </mat-form-field>
+                            </div>
+    
+                            <div class="col-md-5 npl">
+                                <mat-form-field class="fullwidth">
+                                    <input matInput [(ngModel)]="indvdContactNumber" placeholder="Number" mask="000-0000000">
+                                </mat-form-field>
+                            </div>
+    
+                            <div class="col-md-1 text-right nopadding" style="margin: 20px 0 0 -10px;">
+                                <span class="pointerCursor fa fa-plus iconAdd" (click)="addIndvdContact()"></span>
+                            </div>
+    
+                        </div>
+    
+                        <mat-radio-group>
+                        <div class="row" *ngFor=" let item of indvdContactList; let i=index" >
+                            <div class="col-md-11" *ngIf="item.index == indvdListIndex">
+                                <p>
+                                    <mat-radio-button value="{{i}}"></mat-radio-button>
+                                    {{item.contactNumber}}
+                                </p>
+                            </div>
+    
+                            <div class="col-md-1 text-right nopadding" style="margin: 0 0 0 -10px;" *ngIf="item.index == indvdListIndex">
+                                <span class="pointerCursor fa fa-times fa-lg iconRemove" (click)="removeIndvdContact(i)"></span>
+                            </div>
+    
+                        </div>
+                        </mat-radio-group>
+    
+    
+                        <!--Email row -->
+                        <div class="row">
+                            <div class="col-md-11">
+                                <mat-form-field class="fullwidth">
+                                    <input matInput [(ngModel)]="indvdEmailAdrs" placeholder="Email">
+                                    <span matPrefix class="pointerCursor fa fa-envelope fa-lg iconEmail"></span>
+                                </mat-form-field>
+                            </div>
+    
+                            <div class="col-md-1 nopadding text-right" style="margin: 20px 0 0 -10px;">
+                                <span class="pointerCursor fa fa-plus iconAdd" (click)="addIndvdEmail()"></span>
+                            </div>
+    
+                        </div>
+    
+                        <mat-radio-group>
+                        <div class="row" *ngFor=" let item of indvdEmailList; let i=index" >
+                            <div class="col-md-11" *ngIf="item.index == indvdListIndex">
+                                <p>
+                                    <mat-radio-button value="{{i}}"></mat-radio-button>
+                                    {{item.email}}
+                                </p>
+                            </div>
+    
+                            <div class="col-md-1 text-right nopadding" style="margin: 0 0 0 -10px;" *ngIf="item.index == indvdListIndex">
+                                <span class="pointerCursor fa fa-times fa-lg iconRemove" (click)="removeIndvdEmail(i)"></span>
+                            </div>
+    
+                        </div>
+                        </mat-radio-group>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button mat-raised-button class="btnClass" style="border-radius: 0;" (click)="clearIndividual()">
+                            &nbsp;&nbsp;&nbsp;RESET&nbsp;&nbsp;&nbsp;
+                        </button>
+
+                        &nbsp;&nbsp;&nbsp;
+
+                        <button mat-raised-button class="btnClass" style="border-radius: 0;" (click)="addIndividual()">
+                            &nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--end Modal body -->
+
+        </div>
+    </div>
+</div>
+<!-- End Add Director Modal Window  -->
+
+
+<!-- Start Add Partner Modal Window -->
+<div class="modal fade" id="partnerModal">
+    <div class="modal-dialog shadow-lg-dark modal-lg modalCmpnyPro">
+        <div class="modal-content modal-bottom-border-blue">
+
+        <!--start Modal Header -->
+        <div class="modal-header bg-skyBlue borderBlue5px">
+            <h4 class="modal-title">Add Partner</h4>
+            <button type="button" class="btn-close cursorPointer" data-dismiss="modal"></button>
+        </div>
+        <!--end Modal Header -->
+
+
+
+        <!--start Modal body -->
+        <div class="modal-body mr-3 ml-3 mb-3">
+
+            <!-- Partner Type row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field class="fullwidth">
+                        <input matInput placeholder="Partner Type" [(ngModel)]="pType" required>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- Share Percentage row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field class="fullwidth">
+                        <input matInput placeholder="Share Percentage" [(ngModel)]="pShare" required>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- Pertner name row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field class="fullwidth">
+                        <input matInput placeholder="Partner's Name" [(ngModel)]="pName" required>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- CNIC row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field class="fullwidth">
+                        <input matInput placeholder="CNIC Number" [(ngModel)]="pCNIC" mask="00000-0000000-0" required>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!--Address row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field class="fullwidth">
+                        <textarea matInput placeholder="Address" [(ngModel)]="indvdAddress"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!--Country row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field class="fullwidth">
+                        <mat-select placeholder="Country" [(ngModel)]="indvdCountry" disableOptionCentering required>
+                            <input type="text" placeholder="Search..." [(ngModel)]="srchCntry" class="form-control">
+                            <mat-option *ngFor="let item of cntryList | search:'cntryName': srchCntry" [value]="item.cntryCd">
+                                <table>
+                                    <tr class='d-flex'>
+                                        <td class="col-12">{{ item.cntryName }}</td>
+                                    </tr>
+                                </table>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!--City Zip row -->
+            <div class="row">
+                    <div class="col-md-8">
+                        <mat-form-field class="fullwidth">
+                            <mat-select placeholder="City" [(ngModel)]="indvdCity" disableOptionCentering required>
+                                <input type="text" placeholder="Search..." [(ngModel)]="srchCity" class="form-control">
+                                <mat-option *ngFor="let item of cityList | search:'districtName': srchCity" [value]="item.districtCd">
+                                    <table>
+                                        <tr class='d-flex'>
+                                            <td class="col-12">{{ item.districtName }}</td>
+                                        </tr>
+                                    </table>
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                        <mat-form-field class="fullwidth">
+                                <input matInput placeholder="Zip Code" [(ngModel)]="indvdZipCode">
+                        </mat-form-field>
+                    </div>
+            </div>
+
+            <!-- contact row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="fullwidth">
+                                <mat-select placeholder="Contact Type" [(ngModel)]="indvdContactType" disableOptionCentering>
+                                    <mat-option *ngFor=" let item of cntctTypeList" [value]="item.teleTypeCd">
+                                        {{item.teleTypeName}}
+                                    </mat-option>
+                                </mat-select>
+                                <span matPrefix class="pointerCursor fa fa-phone fa-lg iconPhone"></span>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-5 npl">
+                            <mat-form-field class="fullwidth">
+                                <input matInput [(ngModel)]="indvdContactNumber" placeholder="Number" mask="000-0000000">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-1 text-right nopadding" style="margin: 20px 0 0 -10px;">
+                            <span class="pointerCursor fa fa-plus iconAdd" (click)="addIndvdContact()"></span>
+                        </div>
+
+                    </div>
+
+                    <mat-radio-group>
+                        <div class="row" *ngFor=" let item of indvdContactList; let i=index" >
+                            <div class="col-md-11" *ngIf="item.index == indvdListIndex">
+                                <p>
+                                    <mat-radio-button value="{{i}}"></mat-radio-button>
+                                    {{item.contactNumber}}
+                                </p>
+                            </div>
+
+                            <div class="col-md-1 text-right nopadding" style="margin: 0 0 0 -10px;" *ngIf="item.index == indvdListIndex">
+                                <span class="pointerCursor fa fa-times fa-lg iconRemove" (click)="removeIndvdContact(i)"></span>
+                            </div>
+
+                        </div>
+                    </mat-radio-group>
+
+
+
+                    <!--Email row -->
+                    <div class="row">
+                        <div class="col-md-11">
+                            <mat-form-field class="fullwidth">
+                                <input matInput [(ngModel)]="indvdEmailAdrs" placeholder="Email">
+                                <span matPrefix class="pointerCursor fa fa-envelope fa-lg iconEmail"></span>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-1 nopadding text-right" style="margin: 20px 0 0 -10px;">
+                            <span class="pointerCursor fa fa-plus iconAdd" (click)="addIndvdEmail()"></span>
+                        </div>
+
+                    </div>
+
+                    <mat-radio-group>
+                        <div class="row" *ngFor=" let item of indvdEmailList; let i=index" >
+                            <div class="col-md-11" *ngIf="item.index == indvdListIndex">
+                                <p>
+                                    <mat-radio-button value="{{i}}"></mat-radio-button>
+                                    {{item.email}}
+                                </p>
+                            </div>
+
+                            <div class="col-md-1 text-right nopadding" style="margin: 0 0 0 -10px;" *ngIf="item.index == indvdListIndex">
+                                <span class="pointerCursor fa fa-times fa-lg iconRemove" (click)="removeIndvdEmail(i)"></span>
+                            </div>
+
+                        </div>
+                    </mat-radio-group>
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button mat-raised-button class="btnClass" style="border-radius: 0;" (click)="clearIndividual()">
+                        &nbsp;&nbsp;&nbsp;RESET&nbsp;&nbsp;&nbsp;
+                    </button>
+
+                    &nbsp;&nbsp;&nbsp;
+
+                    <button mat-raised-button class="btnClass" style="border-radius: 0;" (click)="addIndividual()">
+                        &nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--end Modal body -->
+
+        </div>
+    </div>
+</div>
+<!-- End Add Partner Modal Window  -->
+
+
+<!-- Start Modal Window to delete Payemnt voucher data -->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog shadow-lg-dark">
+        <div class="modal-content">
+            <!--start delete user Modal body -->
+            <div class="modal-body">
+            <br>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                    <h2>Delete Currency</h2>
+                    <!-- <h2 [(ngModel)]="userName">{{userName}}</h2> -->
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-md-12">
+                    <mat-form-field class="fullwidth">
+                        <input matInput placeholder="Enter Password" type="password" [(ngModel)]="txtdPassword">
+                    </mat-form-field>
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-md-12">
+                    <mat-form-field class="fullwidth">
+                        <input matInput placeholder="Enter PIN" type="password" [(ngModel)]="txtdPin">
+                    </mat-form-field>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                    <button mat-raised-button color="warn" >Delete</button>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <!--end delete user Modal body -->
+
+            <!--start delete user Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="closeDeleteModel">Close</button>
+            </div>
+            <!--end delete user Modal footer -->
+
+        </div>
+    </div>
+</div>
+<!-- End Modal Window to delete Payemnt voucher data -->

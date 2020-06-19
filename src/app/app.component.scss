@@ -1,0 +1,216 @@
+//@import '../../../../src/styles.scss';
+
+.mat-tab-group {
+  color: #34353A !important;
+}
+
+.mat-tab-label {
+  background-color: transparent;
+  color: #34353A !important;
+  min-width: 25px !important;
+}
+
+.mat-accordion {
+  background-color: green;
+}
+
+.mat-expansion-panel {
+  //background-color: transparent;
+  color: #34353A !important;
+
+}
+
+.mat-expansion-panel-header {
+  background-color: #efefef !important;
+  border-left: 5px solid #efefef;
+  padding-right: 20px;
+  padding-left: 10px;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  background: #ffffff !important;
+  border-bottom: 1px solid #efefef;
+  border-left: 5px solid #273E94;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 0 10px !important;
+}
+
+.mat-expansion-panel-header-description,
+.mat-expansion-panel-header-title {
+  // display: flex;
+  flex-grow: 0;
+  /* margin-right: 16px; */
+  padding-right: 10px;
+}
+
+.mat-header-hover:hover {
+  background-color: #fff !important;
+  border-left: 5px solid #273E94;
+}
+
+.mat-panel-title .label {
+  background: #34353A;
+
+}
+
+.mat-expansion-panel a {
+  text-decoration: none !important;
+  color: #34353A !important;
+}
+
+.menuButton {
+  margin-top: 0;
+  height: 100% !important;
+  width: 248px !important;
+  font-size: 1.3em !important;
+  background-color: #E6E6E6 !important;
+  text-align: right;
+  border-radius: 0px;
+  box-shadow: none;
+}
+
+.menuBtnUser {
+  height: 100% !important;
+  width: 100% !important;
+  // min-width: 10em !important;
+  // min-height: 2em !important;
+  font-family: Roboto-Regular !important;
+  //font-size: 1.25em !important;
+  color: white;
+  background-color: #4F6EB1 !important;
+  border: 0px soli red !important;
+  padding: 0;
+}
+
+.menuSearch {
+  //border:1px solid black;
+  color: white;
+  //font-family: Roboto-Regular !important;
+  //font-size: 1.5em;
+  background: #7B8EB8;
+}
+
+.menuSIcon {
+  //border:1px solid black;
+  color: white;
+  //font-family: Roboto-Light !important;
+  font-size: 2.0em;
+  margin-top: 7%;
+  margin-right: -15%;
+  //background: #7B8EB8;
+}
+
+.sideMenuIcon {
+  //border:1px solid black;
+  color: #4E6BAA;
+  //font-family: Roboto-Light !important;
+  font-size: 2.0em;
+  margin-top: 15%;
+  //background: #7B8EB8;
+}
+
+/* The side navigation menu **************************************************************************************/
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: #e6e6e6;
+  overflow-x: hidden;
+  //padding-top: 48px !important;
+  transition: 0.5s;
+  -webkit-box-shadow: 26px 18px 65px -22px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 26px 18px 65px -22px rgba(0, 0, 0, 0.75);
+  box-shadow: 26px 18px 65px -22px rgba(0, 0, 0, 0.75);
+}
+
+.sidenav .closeBtn {
+  //******************************************************** same like menuButton
+  border: 0px solid red;
+  height: 45px;
+  width: 100%;
+  margin-top: 0;
+  font-size: 1.3em !important;
+  background-color: #E6E6E6 !important;
+  // text-align: right;
+  border-radius: 0px;
+  box-shadow: none;
+}
+
+.sidenavContainer {
+  border: 0px solid red;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  background-color: #000;
+  opacity: 0.3;
+  z-index: 99;
+  display: none;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  // .sidenav {
+  // padding-top: 15px;
+  // }
+
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+
+
+/*******Drop button css *************************************************************************/
+.bgBlue .dropbtn {
+  border: 0px solid red;
+  background-color: transparent;
+  color: #fff;
+  padding: 12px;
+  font-size: 14px;
+  height: 100% !important;
+}
+
+.bgBlue .dropdown {
+  position: relative;
+  display: inline-block;
+
+
+}
+
+.bgBlue .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 7px 0 7px 0;
+  text-align: left;
+}
+
+.bgBlue .dropdown-content .btn {
+  color: #4E6FB5;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 13px;
+  text-align: left;
+}
+
+.bgBlue .dropdown-content .btn:hover {
+  background-color: #e6e6e6;
+}
+
+.bgBlue .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.bgBlue .dropdown:hover .dropbtn {
+  background-color: #4262A6;
+}

@@ -1,0 +1,73 @@
+<!--Contact number cmbo bx row-->
+<div class="row">
+  <div class="col-md-6">
+    <mat-form-field class="fullwidth">
+      <mat-select placeholder="Contact Type" [(ngModel)]="contactType">
+        <mat-option *ngFor=" let item of cntctTypeList" [value]="item.teleTypeCd">
+          {{item.teleTypeName}}
+        </mat-option>
+      </mat-select>
+      <span matPrefix class="pointerCursor fa fa-phone fa-lg iconPhone"></span>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-5 npl">
+    <mat-form-field class="fullwidth">
+      <input matInput [(ngModel)]="contactNumber" placeholder="Number" maxlength="10" mask="000-0000000">
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-1 text-right nopadding" style="margin: 20px 0 0 -10px;">
+    <span class="pointerCursor fa fa-plus iconAdd" (click)="addContact()"></span>
+  </div>
+
+</div>
+
+<mat-radio-group>
+  <div class="row" *ngFor=" let item of contactList; let i=index">
+    <div class="col-md-11" *ngIf="item.status != 2">
+      <p>
+        <mat-radio-button value="{{i}}"></mat-radio-button>
+        {{item.contactNumber}}
+      </p>
+    </div>
+
+    <div class="col-md-1 text-right nopadding" *ngIf="item.status != 2" style="margin: 0 0 0 -10px;">
+      <span class="pointerCursor fa fa-times fa-lg iconRemove" (click)="removeContact(i)"></span>
+    </div>
+  </div>
+</mat-radio-group>
+
+
+
+<!--Email row -->
+<div class="row">
+  <div class="col-md-11">
+    <mat-form-field class="fullwidth">
+      <input matInput [(ngModel)]="emailAdrs" placeholder="Email">
+      <span matPrefix class="pointerCursor fa fa-envelope fa-lg iconEmail"></span>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-1 nopadding text-right" style="margin: 20px 0 0 -10px;">
+    <span class="pointerCursor fa fa-plus iconAdd" (click)="addEmail()"></span>
+  </div>
+
+</div>
+
+<mat-radio-group>
+  <div class="row" *ngFor=" let item of emailList; let i=index">
+
+    <div class="col-md-11" *ngIf="item.status != 2">
+      <p>
+        <mat-radio-button value="{{item.email}}"></mat-radio-button>
+        {{item.email}}
+      </p>
+    </div>
+
+    <div class="col-md-1 text-right nopadding" *ngIf="item.status != 2" style="margin: 0 0 0 -10px;">
+      <span class="pointerCursor fa fa-times fa-lg iconRemove" (click)="removeEmail(i)"></span>
+    </div>
+
+  </div>
+</mat-radio-group>

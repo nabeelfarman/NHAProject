@@ -1,0 +1,80 @@
+
+///////////////////////////////////////////
+////////modules buttons///////////////////
+//////////////////////////////////////////
+
+.module-widget{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+li{
+    display: inline-block;
+
+}
+
+.module-button{
+    width: 150px;
+    padding: 10px;
+    letter-spacing: 1px;
+    margin: 5px;
+}
+
+.finance{
+    background-color: #008B8B; 
+}
+
+.hr{
+    background-color: #9932CC; 
+}
+
+.payroll{
+    background-color: #A52A2A; 
+}
+
+.user{
+    background-color: #D2691E; 
+}
+
+.company{
+    background-color: #FFA500; 
+}
+
+.disaster{
+    background-color: #6B8E23; 
+}
+
+.procurement{
+    background-color: #DC143C; 
+}
+
+.warehouse{
+    background-color: #228B22; 
+}
+
+.audit{
+    background-color: #4682B4; 
+}
+
+ul{
+    text-decoration: none;
+    color: white;
+}
+
+.module-text{
+    width: 100px;
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    padding-left: 10px;
+}
+
+.fa{
+    width: 20px;
+    text-align: center;
+}
+
+.module-button:hover{
+    background-color: #2F4F4F;
+    transition: 0.5s;
+}

@@ -1,0 +1,267 @@
+<br />
+<!-- start menubar buttons -->
+<div class="myContainer mat-elevation-z8 bgWhite">
+  <!--start top nav box shadow div-->
+  <div class="topnav boxShadow">
+    <!-- start heading & logo div-->
+    <div>
+      <span class="fa iconContainer">
+        <span class="fa icon-hr-post"></span>
+      </span>
+      <h1>Experience</h1>
+
+      <a class="pointerCursor" data-toggle="modal" data-target="#addDegreeModal" (click)="clear()">
+        <i class="fa fa-plus-square"></i>
+        Add New
+      </a>
+      <!--end add role permission button-->
+    </div>
+    <!-- end heading & logo div-->
+  </div>
+  <!--end top nav box shadow div-->
+</div>
+
+<!-- Table Container Starts -->
+<div class="myContainer bgWhite minHeight84 allBorder">
+  <!--Start search textbox Row-->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="searchBar">
+        <span class="fa icon-search"></span>
+        <input class="noneOutLine menuSearchBox" type="text" maxlength="32" placeholder="Search"
+          [(ngModel)]="tblSearch" />
+      </div>
+      <!-- <mat-form-field class="fullwidth">
+        <input matInput [(ngModel)]="tblSearch" placeholder="Search">
+      </mat-form-field>
+      <i class="fab fa-accessible-icon"></i> -->
+    </div>
+  </div>
+  <!--end search textbox Row-->
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped bottomBorder">
+        <thead>
+          <tr class="d-flex">
+            <th class="col-1 text-center">Sr. #</th>
+            <th class="col-3 text-left" [class.active]="order === 'qlfctnName'" (click)="setOrder('qlfctnName')">
+              Group
+              <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+              <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+            </th>
+            <th class="col-3 text-left" [class.active]="order === 'qlfctnCriteriaName'"
+              (click)="setOrder('qlfctnCriteriaName')">
+              Title
+              <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+              <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+            </th>
+            <th class="col-3 text-left" [class.active]="order === 'qlfctnCriteriaDesc'"
+              (click)="setOrder('qlfctnCriteriaDesc')">
+              Description
+              <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+              <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+            </th>
+            <th class="col-2 text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="d-flex" *ngFor="
+              let deg of degreeCriteriaList
+                | search
+                  : 'qlfctnName,qlfctnCriteriaName,qlfctnCriteriaDesc'
+                  : tblSearch
+                | paginate
+                  : { itemsPerPage: itemPerPage, currentPage: p, id: 'first' }
+                | orderBy: order:reverse:'case-insensitive';
+              let i = index
+            ">
+            <td class="col-1 text-center">{{ i + 1 }}</td>
+            <td class="col-3 text-left">{{ deg.qlfctnName }}</td>
+            <td class="col-3 text-left">{{ deg.qlfctnCriteriaName }}</td>
+            <td class="col-3 text-left">{{ deg.qlfctnCriteriaDesc }}</td>
+            <td class="col-1 text-center">
+              <span class="fa tableIcon pointerCursor" data-toggle="modal" data-target="#addDegreeModal"
+                (click)="edit(deg)">
+                <span class="fa icon-u-edit"></span>
+              </span>
+            </td>
+            <td class="col-1 text-center">
+              <span class="fa tableIcon pointerCursor" (click)="deleteExperienceCriteria(deg)">
+                <span class="fa icon-u-delete"></span>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination Starts -->
+      <div class="col-md-12 text-right">
+        <div class="paginationBox">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+        <div class="paginationBox">
+          <mat-form-field class="pagenateList">
+            <mat-select [(ngModel)]="itemPerPage">
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="10">10</mat-option>
+              <mat-option value="15">15</mat-option>
+              <mat-option value="20">20</mat-option>
+              <mat-option value="25">25</mat-option>
+              <mat-option value="30">30</mat-option>
+              <mat-option value="35">35</mat-option>
+              <mat-option value="40">40</mat-option>
+              <mat-option value="45">45</mat-option>
+              <mat-option value="50">50</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="paginationBox">
+          Item per page: &nbsp;&nbsp;
+        </div>
+      </div>
+      <!-- Pagination Ends -->
+    </div>
+  </div>
+</div>
+<!-- Table Container Ends -->
+<br />
+
+<!-- Hidden Table for Print and PDF files starts-->
+<div class="container printArea" id="printArea" [hidden]="true">
+  <div class="printDiv">
+    <!--Start heading table -->
+    <table>
+      <tr>
+        <td width="15%" style="border:none;">
+          <img src="../../../assets/images/Ambit-Logo.svg" width="135px" />
+        </td>
+
+        <td style="border:none;">
+          <div class="commonCss cssHeading">Infovative Solutions</div>
+          <div class="commonCss cssAddress">
+            Office #209, 3rd Floor Anayat Plaza, G11 Markaz Islamabad.
+          </div>
+          <div class="commonCss cssContact">
+            Mobile: 0313-1234567, Ph. 051-5544661
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <!--End heading table -->
+
+    <br /><br />
+
+    <!--Start table Row-->
+    <div class="row">
+      <table>
+        <thead>
+          <tr class="d-flex">
+            <th class="col-1 text-center">Sr. #</th>
+            <th>Experience Group</th>
+            <th>Experience Title</th>
+            <th>Title Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="d-flex" *ngFor="
+              let deg of degreeCriteriaList
+                | search
+                  : 'qlfctnName,qlfctnCriteriaName,qlfctnCriteriaDesc'
+                  : tblSearch;
+              let i = index
+            ">
+            <td class="col-1 text-center">{{ i + 1 }}</td>
+            <td class="col-3 text-left">{{ deg.qlfctnName }}</td>
+            <td class="col-4 text-left">{{ deg.qlfctnCriteriaName }}</td>
+            <td class="col-4 text-left">{{ deg.qlfctnCriteriaDesc }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- end table row -->
+  </div>
+</div>
+<!-- Hidden Table for Print and PDF files ends-->
+
+<!-- Hidden Table Starts for Excel and CSV files -->
+<!-- <igx-grid #excelDataContent [data]="excelDataList" [autoGenerate]="false" height="null" width="null" [hidden]="true">
+</igx-grid> -->
+<!-- Hidden Table Ends  for Excel and CSV files -->
+
+<!-- Add Degree Modal Starts -->
+<div class="modal fade" id="addDegreeModal">
+  <div class="modal-dialog shadow-lg-dark modal-md">
+    <div class="modal-content modal-bottom-border-blue">
+      <div class="modal-header bg-skyBlue borderBlue5px">
+        <h5 class="modal-title">{{expHeading}} Experience</h5>
+        <div>
+          <button type="button" class="btn-close cursorPointer" data-dismiss="modal"></button>
+        </div>
+      </div>
+      <div class="modal-body m-3">
+        <!-- Row 1 -->
+        <div class="row">
+          <div class="col-md-4">
+            <label><b>Experience Type</b></label>
+          </div>
+
+          <div class="col-md-8 bgWhiteGrey bottomBorder">
+            <label>{{ degreeTypeName }}</label>
+          </div>
+          <!-- hidden Id field -->
+          <input matInput [(ngModel)]="degreeId" [hidden]="true" />
+        </div>
+        <hr />
+        <!-- Row 2 -->
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <mat-select [(ngModel)]="degreeGroup" placeholder="Select Experience Group" required>
+                <mat-option *ngFor="let degree of degreeGroupList" [value]="degree.qlfctnCd">
+                  {{ degree.qlfctnName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Row 4 -->
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput [(ngModel)]="degreeTitle" placeholder="Experience Title" required />
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Row 5 -->
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput [(ngModel)]="degreeTitleDescription" placeholder="Experience Title Description"
+                required />
+            </mat-form-field>
+          </div>
+        </div>
+        <!--start buttons row -->
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <button mat-raised-button class="btn fullwidth pt-1 pb-1 noneOutLine" (click)="clear()"
+              style="border-radius: 0;">
+              &nbsp;&nbsp;&nbsp;RESET&nbsp;&nbsp;&nbsp;
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button mat-raised-button class="btn fullwidth pt-1 pb-1 noneOutLine" (click)="saveExperienceCriteria()"
+              style="border-radius: 0;">
+              &nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;
+            </button>
+          </div>
+        </div>
+        <!--end buttons row -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Degree Modal Ends -->

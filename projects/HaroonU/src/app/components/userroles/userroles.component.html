@@ -1,0 +1,313 @@
+<!---------------------------------------------------------------------------------->
+<!---------------------------------------------------------------------------------->
+<!---------------- This is the User Role screen in which admin or  ----------------->
+<!---------------- super admin can make any role. Admin can also   ----------------->
+<!----------------            update & delete the role.            ----------------->
+<!---------------------------------------------------------------------------------->
+<!---------------------------------------------------------------------------------->
+
+
+
+<br />
+<!-- start menubar buttons -->
+<div class="myContainer mat-elevation-z8 bgWhite">
+  <!--start top nav box shadow div-->
+  <div class="topnav boxShadow">
+    <!-- start heading & logo div-->
+    <div>
+
+      <span class="fa iconContainer">
+        <span class="fa icon-u-userprole"></span>
+      </span>
+      <h1> User Role Permissions</h1>
+
+      <!-- <a class="pointerCursor" (click)="downloadExcel()">
+        <i class="fa fa-file-excel-o"></i>
+        Excel
+      </a>
+
+      <a class="pointerCursor" (click)="downloadCSV()">
+        <i class="fa fa-file-text-o"></i>
+        CSV
+      </a>
+
+      <a class="pointerCursor" (click)="downloadPDF()">
+        <i class="fa fa-file-pdf-o"></i>
+        PDF
+      </a>
+
+      <a class="pointerCursor" (click)="printDiv()">
+        <i class="fa fa-print"></i>
+        Print
+      </a> -->
+
+      <!--start add role permission button-->
+      <a class="pointerCursor" data-toggle="modal" data-target="#userRoleModal" (click)="clear()">
+        <i class="fa fa-plus-circle"></i>
+        ADD ROLE PERMISSIONS
+      </a>
+      <!--end add role permission button-->
+    </div>
+    <!-- end heading & logo div-->
+  </div>
+  <!--end top nav box shadow div-->
+</div>
+<!-- end menubar buttons -->
+
+<!--start myContainer div-->
+<div class="myContainer bgWhite minHeight84 allBorder">
+  <!--Start 1st Row-->
+  <div class="row">
+    <!--start search textbox column-->
+    <div class="col-md-12">
+      <div class="searchBar mt-2">
+        <span class="fa icon-search"></span>
+        <input class="noneOutLine menuSearchBox" type="text" maxlength="32" placeholder="Search"
+          [(ngModel)]="tblSearch">
+      </div>
+    </div>
+    <!--end search textbox column-->
+  </div>
+  <!--end 1st Row-->
+
+  <!--Start table Row-->
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped fullwidth">
+        <thead>
+          <tr class="d-flex">
+            <th class="col-1 text-center ">Sr No.</th>
+            <th [class.active]="order === 'erpRoleName'" (click)="setOrder('erpRoleName')"
+              class="col-4 pointerCursor text-left ">
+              Role Name
+              <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+              <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+            </th>
+            <th [class.active]="order === 'noOfModules'" (click)="setOrder('noOfModules')"
+              class="col-3 pointerCursor text-center">
+              No. of Modules
+              <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+              <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+            </th>
+            <th class="col-2 text-center">Edit</th>
+            <th class="col-2 text-center">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr *ngFor="let item of userDetail | search:'UserName,Email': query" class='d-flex'> -->
+          <tr class='d-flex'
+            *ngFor="let item of roles | search:'erpRoleName,noOfModules,uNoPage':tblSearch | paginate: { itemsPerPage: itemPerPage, currentPage: p } | orderBy: order:reverse:'case-insensitive' let i=index">
+            <!-- <td class="col-1 text-center" hidden>{{item.erpRoleCd}}</td> -->
+            <td class="col-1 text-center">{{i+1}}</td>
+            <td class="col-4 pointerCursor text-left">{{item.erpRoleName}}</td>
+            <td class="col-3 pointerCursor text-center">{{item.noOfModules}}</td>
+            <td class="col-2 text-center">
+
+              <span class="fa tableIcon pointerCursor" data-toggle="modal" data-target="#userRoleModal"
+                (click)="edit(item)">
+                <span class="fa icon-u-edit"></span>
+              </span>
+
+            </td>
+            <td class="col-2 text-center">
+
+              <!-- <span class="fa tableIcon pointerCursor" data-toggle="modal" data-target="#dUserRoleModal" (click)="delete(item)">
+                <span class="fa icon-u-delete" ></span>
+              </span>  -->
+
+              <span class="fa tableIcon pointerCursor" (click)="delete(item)">
+                <span class="fa icon-u-delete"></span>
+              </span>
+
+            </td>
+
+
+          </tr>
+        </tbody>
+      </table>
+
+
+      <!-- Pagination Starts -->
+      <div class="col-md-12 text-right">
+        <div class="paginationBox">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+        <div class="paginationBox">
+          <mat-form-field class="pagenateList">
+            <mat-select [(ngModel)]="itemPerPage">
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="10">10</mat-option>
+              <mat-option value="15">15</mat-option>
+              <mat-option value="20">20</mat-option>
+              <mat-option value="25">25</mat-option>
+              <mat-option value="30">30</mat-option>
+              <mat-option value="35">35</mat-option>
+              <mat-option value="40">40</mat-option>
+              <mat-option value="45">45</mat-option>
+              <mat-option value="50">50</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="paginationBox">
+          Item per page: &nbsp;&nbsp;
+        </div>
+      </div>
+      <!-- Pagination Ends -->
+
+    </div>
+
+  </div>
+  <!-- end table row -->
+</div>
+<!--end myContainer div-->
+
+<br />
+
+<!-- Hidden Table Starts for Excel and CSV files -->
+<!-- <igx-grid #excelDataContent [data]="excelDataList" [autoGenerate]="false" height="null" width="null" [hidden]="true">
+</igx-grid> -->
+<!-- Hidden Table Ends  for Excel and CSV files -->
+
+<!-- Hidden Table for Print and PDF files starts-->
+<div class="container mat-elevation-z8 printArea" id="printArea" #exportPDF [hidden]="true">
+  <div class="printDiv">
+
+    <!--Start heading table -->
+    <table>
+      <tr>
+        <td width="15%" style="border:none;">
+          <img src="../../../assets/images/logo.png" width="135px">
+        </td>
+
+        <td style="border:none;">
+          <div class="commonCss cssHeading">Logix Solutions</div>
+          <div class="commonCss cssAddress">Office #209, 2nd Floor Ahmed Plaza, Rawalpindi Road Fateh Jang.</div>
+          <div class="commonCss cssContact">Mobile: 0313-5300471, Ph. 057-2212704</div>
+        </td>
+      </tr>
+    </table>
+    <!--End heading table -->
+
+    <br /><br />
+
+    <!--Start table Row-->
+    <div class="row">
+      <table>
+        <thead>
+          <tr class="d-flex">
+            <th class="col-1 text-center">Sr. #</th>
+            <th class="col-4 text-left"> Role Name </th>
+            <th class="col-4 text-left"> No. of Modules </th>
+            <th class="col-3 text-left"> No. of Pages </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="d-flex" *ngFor="let user of rolesData | search:'uRoleName,uNoModule,uNoPage':roleSearch let
+            i=index">
+            <td class="col-1 text-center">{{i+1}}</td>
+            <td class="col-4 text-left">{{user.uRoleName}}</td>
+            <td class="col-4 text-left">{{user.uNoModule}}</td>
+            <td class="col-3 text-left">{{user.uNoPage}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- end table row -->
+  </div>
+</div>
+<!-- Hidden Table for Print and PDF files ends-->
+
+
+
+
+<!----------------------------------------------------------->
+<!----------------------------------------------------------->
+<!----------------- Start Modal Windows --------------------->
+<!----------------------------------------------------------->
+<!----------------------------------------------------------->
+
+
+<!-- Start Modal Window to add user role -->
+<div class="modal fade" id="userRoleModal">
+  <!--start modal window dialog-->
+  <div class="modal-dialog shadow-lg-dark modal-lg">
+    <!--start modal window contents-->
+    <div class="modal-content modal-bottom-border-blue">
+
+      <!--start userRoleModal Header -->
+      <div class="modal-header bg-skyBlue borderBlue5px">
+        <h4 class="modal-title">{{roleHeading}} Role Permission</h4>
+        <button type="button" class="btn-close cursorPointer" data-dismiss="modal"></button>
+      </div>
+      <!--end userRoleModal Header -->
+
+      <!--start userRoleModal body -->
+      <div class="modal-body m-3">
+        <label [hidden]="true" [(ngModel)]="erpRoleCd" ngDefaultControl></label>
+
+        <!--start userRoleModal 1st row-->
+        <div class="row">
+          <!--start userRoleModal Role Name column-->
+          <div class="col-md-5">
+            <mat-form-field class="fullwidth">
+              <input matInput [(ngModel)]="erpRoleName" placeholder="User Role">
+            </mat-form-field>
+          </div>
+          <!--end userRoleModal Role Name column-->
+        </div>
+        <!--end userRoleModal 1st row-->
+
+        <!--start userRoleModal 2nd row-->
+        <div class="row">
+          <!--start userRoleModal menu tree column-->
+          <div class="col-md-5">
+            <h5>Select Module List</h5>
+            <p-tree class="fullwidth" [style]="{'min-height':'20em','max-height':'20em','overflow':'auto'}"
+              [value]="menuTree" selectionMode="checkbox" [(selection)]="selectedMenu"></p-tree>
+          </div>
+          <!--end userRoleModal menu tree column-->
+
+          <!--start userRoleModal add or remove role buttons column-->
+          <div class="col-md-2 text-center m-auto">
+            <div class="btn-Square center-block" (click)="addRoles()">
+              <span class="fa fa-caret-right"></span>
+            </div>
+            <div class="btn-Square center-block mt-3" (click)="removeRoles()">
+              <span class="fa fa-caret-left"></span>
+            </div>
+          </div>
+          <!--end userRoleModal add or remove role buttons column-->
+
+          <!--start userRoleModal role tree column-->
+          <div class="col-md-5">
+            <h5>Selected Permissions</h5>
+            <p-tree class="fullwidth" [value]="roleTree"
+              [style]="{'min-height':'20em','max-height':'20em','overflow':'auto'}" selectionMode="checkbox"
+              [(selection)]="selectedRole"></p-tree>
+            <!-- <div><span *ngFor="let file of selectedRole">{{file.label}}<br/> </span></div> -->
+          </div>
+          <!--end userRoleModal role tree column-->
+
+        </div>
+        <!--end userRoleModal 2nd row-->
+        <br />
+
+        <!--start userRoleModal 3rd row-->
+        <div class="row">
+          <!--start userRoleModal save tree column-->
+          <div class="offset-md-9 col-md-3">
+            <button mat-raised-button class="btn fullwidth text-uppercase pt-1 pb-1" (click)="save()"
+              style="border-radius: 0">&nbsp;&nbsp;&nbsp;Save&nbsp;&nbsp;&nbsp;</button>
+          </div>
+          <!--end userRoleModal save tree column-->
+        </div>
+        <!--end userRoleModal 3rd row-->
+      </div>
+      <!--end userRoleModal body -->
+
+    </div>
+    <!--end modal window contents-->
+  </div>
+  <!--end modal window dialog-->
+</div>
+<!-- End Modal Window to user role permissions -->

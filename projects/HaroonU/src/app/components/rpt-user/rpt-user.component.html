@@ -1,0 +1,341 @@
+<!--start report-->
+<div class="row mt-5 mb-4">
+
+
+  <div class="offset-md-2 col-md-8 nopadding">
+
+    <div id="sampleReport">
+
+      <!-- Report heading and logo -->
+      <div>
+
+        <!--print button -->
+        <div class="row hideContent">
+          <div class="col-md-12 text-right">
+            <button mat-raised-button data-toggle="modal" data-target="#activeUserModal"
+              style="border-radius: 0; background-color: #4A67AB; color: #fff; margin-right: 5px;">&nbsp;&nbsp;SEARCH&nbsp;
+              <i class="fa fa-search"></i>&nbsp;</button>
+            <button mat-raised-button (click)="printDiv()"
+              style="border-radius: 0; background-color: #2199E8; color: #fff;">&nbsp;&nbsp;PRINT&nbsp; <i
+                class="fa fa-print"></i>&nbsp;</button>
+          </div>
+        </div>
+
+      </div><!-- end Report heading and logo -->
+
+
+      <div class="bgWhite shadow p-3">
+
+        <div class="row">
+          <div class="col-md-6 mt-2">
+            <img src="../assets/images/Ambit-Logo.svg" width="95px">
+          </div>
+          <div class="col-md-6 text-right">
+            <div class="reportHeading">User Report</div>
+            {{toDate | date}}
+          </div>
+        </div>
+
+        <hr class="hideContent">
+
+        <!--search box -->
+        <div class="row hideContent">
+          <div class="col-md-12">
+            <div class="searchBar">
+              <span class="fa icon-search"></span>
+              <input class="noneOutLine menuSearchBox" type="text" maxlength="32" placeholder="Advance Search"
+                [(ngModel)]="tblSearch">
+            </div>
+          </div>
+        </div>
+        <!--end search textbox Row-->
+
+        <!--Start data table -->
+        <div class="row" style="margin-top: 5px;">
+          <div class="col-md-12">
+            <table class="table table-striped fullwidth" id="myTable">
+              <thead>
+                <tr>
+                  <th>S#</th>
+                  <th [class.active]="order === 'indvdlERPUsrID'" (click)="setOrder('indvdlERPUsrID')"
+                    class="pointerCursor">
+                    User Name
+                    <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+                    <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+                  </th>
+                  <th [class.active]="order === 'indvdlFullName'" (click)="setOrder('indvdlFullName')"
+                    class="pointerCursor">
+                    User Login
+                    <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+                    <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+                  </th>
+                  <th [class.active]="order === 'deptName'" (click)="setOrder('deptName')" class="pointerCursor">
+                    Department
+                    <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+                    <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+                  </th>
+                  <th [class.active]="order === 'erpRoleName'" (click)="setOrder('erpRoleName')" class="pointerCursor">
+                    User Role
+                    <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+                    <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+                  </th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let emp of userData | search:'indvdlERPUsrID,indvdlFullName,emailAddrss,erpRoleName,deptName':tblSearch | paginate: { itemsPerPage: itemPerPage, currentPage: p } | orderBy: order:reverse:'case-insensitive'; let i=index">
+                  <td>{{i+1}}</td>
+                  <td>{{emp.indvdlFullName}}</td>
+                  <td>{{emp.indvdlERPUsrID}}</td>
+                  <td>{{emp.deptName}}</td>
+                  <td>{{emp.erpRoleName}}</td>
+                  <td>
+                    <span *ngIf="emp.usrStatus != null">Deactivate</span>
+                    <span *ngIf="emp.usrStatus == null">Active</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination Starts -->
+          <div class="col-md-12 text-right hideContent">
+            <div class="paginationBox">
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+            <div class="paginationBox">
+              <mat-form-field class="pagenateList">
+                <mat-select [(ngModel)]="itemPerPage">
+                  <mat-option value="1">1</mat-option>
+                  <mat-option value="2">2</mat-option>
+                  <mat-option value="10">10</mat-option>
+                  <mat-option value="15">15</mat-option>
+                  <mat-option value="20">20</mat-option>
+                  <mat-option value="25">25</mat-option>
+                  <mat-option value="30">30</mat-option>
+                  <mat-option value="35">35</mat-option>
+                  <mat-option value="40">40</mat-option>
+                  <mat-option value="45">45</mat-option>
+                  <mat-option value="50">50</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="paginationBox">
+              Item per page: &nbsp;&nbsp;
+            </div>
+          </div>
+          <!-- Pagination Ends -->
+
+        </div>
+        <!--end data table -->
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!--end report -->
+
+
+<!-- Hidden Table Starts for Excel and CSV files -->
+<!-- <igx-grid #excelDataContent [data]="excelDataList" [autoGenerate]="false" height="null" width="null" [hidden]="true">
+</igx-grid> -->
+<!-- Hidden Table Ends  for Excel and CSV files -->
+
+
+
+
+
+<!-- Hidden Table for Print and PDF files starts-->
+<div class="container mat-elevation-z8 printArea" id="printArea" #exportPDF [hidden]="true">
+  <div class="printDiv">
+
+    <!--Start heading table -->
+    <table>
+      <tr>
+        <td width="15%" style="border:none;">
+          <img src="../../../assets/images/logo.png" width="135px">
+        </td>
+
+        <td style="border:none;">
+          <div class="commonCss cssHeading">Logix Solutions</div>
+          <div class="commonCss cssAddress">Office #209, 2nd Floor Ahmed Plaza, Rawalpindi Road Fateh Jang.</div>
+          <div class="commonCss cssContact">Mobile: 0313-5300471, Ph. 057-2212704</div>
+        </td>
+      </tr>
+    </table>
+    <!--End heading table -->
+
+    <br /><br />
+
+    <!--Start table Row-->
+    <div class="row">
+      <table>
+        <thead>
+          <tr class="d-flex">
+            <th class="col-1 text-center">Sr. #</th>
+            <th class="col-2 text-left"> User Name </th>
+            <th class="col-3 text-left"> Email </th>
+            <th class="col-2 text-left"> Role </th>
+            <th class="col-2 text-left"> User Since </th>
+            <th class="col-2 text-center"> Last Login </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="d-flex"
+            *ngFor="let user of userData | search:'uName,uEmail,uRole,uSince,lastLogin':userSearch let i=index">
+            <td class="col-1 text-center">{{i+1}}</td>
+            <td class="col-2 text-left">{{user.uName}}</td>
+            <td class="col-3 text-left">{{user.uEmail}}</td>
+            <td class="col-2 text-left">{{user.uRole}}</td>
+            <td class="col-2 text-left">{{user.uSince}}</td>
+            <td class="col-2 text-center">{{user.lastLogin}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- end table row -->
+  </div>
+</div>
+<!-- Hidden Table for Print and PDF files ends-->
+
+
+
+<!-- Start active user Modal Window -->
+<div class="modal fade modal-forgot" id="activeUserModal">
+  <div class="modal-dialog shadow-lg-dark modal-lg modalPopup">
+    <div class="modal-content">
+
+      <!--Start Action Modal Header -->
+      <div class="modal-header">
+        <h4></h4>
+        <div>
+          <button type="button" class="btn-close cursorPointer" data-dismiss="modal"></button>
+        </div>
+      </div>
+      <!--End Action Modal Header -->
+
+      <!--start Modal body -->
+      <div class="modal-body">
+
+        <!--start 1st row-->
+        <div class="row">
+
+          <div class="offset-md-1 col-md-5 nopadding" style="border: 0px solid red;">
+            <p class="fontWhite" style="font-size: 25px;"> <i class="fa fa-search"></i> Search<br /></p>
+          </div>
+
+        </div>
+        <!--end 1st row-->
+
+
+        <!--start 2nd row-->
+        <div class="row">
+
+          <div class="offset-md-1 col-md-5 npl" style="border: 0px solid red;">
+            <mat-form-field class='fullwidth my-form-field' appearance="legacy">
+              <mat-select placeholder="Department" [(ngModel)]="cmbRole">
+                <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchRole">
+                <mat-option *ngFor="let item of roles | search:'erpRoleName':searchRole" [value]="item.erpRoleCd">
+                  <table>
+                    <tr class='d-flex'>
+                      <td class="col-12">{{ item.erpRoleName }}</td>
+                    </tr>
+                  </table>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-5 npr">
+            <mat-form-field class='fullwidth my-form-field' appearance="legacy">
+              <mat-select placeholder="Role" [(ngModel)]="cmbRole">
+                <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchRole">
+                <mat-option *ngFor="let item of roles | search:'erpRoleName':searchRole" [value]="item.erpRoleCd">
+                  <table>
+                    <tr class='d-flex'>
+                      <td class="col-12">{{ item.erpRoleName }}</td>
+                    </tr>
+                  </table>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <!--end 2nd row-->
+
+
+        <!--start 3rd row-->
+        <div class="row">
+
+          <div class="offset-md-1 col-md-5 npl" style="border: 0px solid red;">
+            <mat-form-field class='fullwidth my-form-field' appearance="legacy">
+              <mat-label class="inputLabel">
+                Branch
+              </mat-label>
+              <input matInput id="float-input" type="password" size="32" autofocus>
+            </mat-form-field>
+
+          </div>
+
+          <div class="col-md-5 npr">
+            <mat-form-field class='fullwidth my-form-field' appearance="legacy">
+              <mat-label class="inputLabel">
+                Section
+              </mat-label>
+              <input matInput id="float-input" type="password" size="32" autofocus>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <!--end 3rd row-->
+
+
+        <!--start 4th row-->
+        <div class="row">
+
+          <div class="offset-md-1 col-md-5 npl" style="border: 0px solid red;">
+            <mat-form-field class='fullwidth my-form-field' appearance="legacy">
+              <mat-label class="inputLabel">
+                Name
+              </mat-label>
+              <input matInput id="float-input" type="password" size="32" autofocus>
+            </mat-form-field>
+
+          </div>
+
+          <div class="col-md-5 npr">
+            <mat-form-field class='fullwidth my-form-field' appearance="legacy">
+              <mat-label class="inputLabel">
+                CNIC
+              </mat-label>
+              <input matInput id="float-input" type="password" size="32" autofocus>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <!--end 4th row-->
+
+
+        <!--start button row-->
+        <div class="row">
+
+          <div class="offset-md-1 col-md-10 text-right nopadding" style="border: 0px solid red;">
+            <button mat-raised-button color="primary"
+              class="buttonSquare btnBlueModal">&nbsp;&nbsp;&nbsp;SEARCH&nbsp;&nbsp;&nbsp;</button>
+          </div>
+
+        </div>
+        <!--end button row-->
+
+        <br />
+      </div>
+      <!--end Modal body -->
+
+    </div>
+  </div>
+</div>
+<!-- End active user Modal Window -->

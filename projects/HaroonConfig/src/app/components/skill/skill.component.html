@@ -1,0 +1,441 @@
+<!-- start menubar buttons -->
+<div class="topnav boxShadow">
+  <div>
+
+    <span class="fa iconContainer">
+      <span class="fa icon-config-skills"> </span>
+    </span>
+    <h1> Skills</h1>
+
+    <!-- <div class="logo"><img src="../../../assets/images/skills.svg"></div>
+    <h1> Skills</h1> -->
+
+    <!-- <a class="pointerCursor" (click)="downloadExcel()">
+      <i class="fa fa-file-excel-o"></i>
+      Excel
+    </a>
+
+    <a class="pointerCursor" (click)="downloadCSV()">
+      <i class="fa fa-file-text-o"></i>
+      CSV
+    </a>
+
+    <a class="pointerCursor" (click)="downloadPDF()">
+      <i class="fa fa-file-pdf-o"></i>
+      PDF
+    </a> -->
+
+    <a class="pointerCursor" (click)="printDiv()">
+      <i class="fa fa-print"></i>
+      Print
+    </a>
+
+    <a class="pointerCursor" data-toggle="modal" data-target="#addSkillModal" (click)="clear()">
+      <i class="fa fa-plus-square"></i>
+      Add New
+    </a>
+
+  </div>
+</div>
+<!-- end menubar buttons -->
+
+<!-- Table Container Starts -->
+<div class="container-fluid bottomBorder bgWhite">
+  <!--Start search textbox Row-->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="searchBar">
+        <span class="fa icon-search"></span>
+        <input class="noneOutLine menuSearchBox" type="text" maxlength="32" placeholder="Search"
+          [(ngModel)]="tblSearch">
+      </div>
+    </div>
+  </div>
+  <!--end search textbox Row-->
+
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr class='d-flex'>
+          <th class="col-1 text-center">Sr. #</th>
+          <th class="col-2 text-left" [class.active]="order === 'qlfctnName'" (click)="setOrder('qlfctnName')">
+            Skill Group
+            <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+            <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+          </th>
+          <th class="col-3 text-left" [class.active]="order === 'qlfctnCriteriaName'"
+            (click)="setOrder('qlfctnCriteriaName')">
+            Skill Title
+            <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+            <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+          </th>
+          <th class="col-4 text-left" [class.active]="order === 'qlfctnCriteriaDesc'"
+            (click)="setOrder('qlfctnCriteriaDesc')">
+            Title Description
+            <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+            <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+          </th>
+          <th class="col-2 text-center">Action</th>
+          <!-- <th class="col-1 text-center">Delete</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='d-flex'
+          *ngFor="let deg of skillCriteriaList | search:'qlfctnName,qlfctnCriteriaName,qlfctnCriteriaDesc':tblSearch | paginate: { itemsPerPage: itemPerPage, currentPage: p, id: 'first' } | orderBy: order:reverse:'case-insensitive' let i=index">
+          <td class="col-1 text-center">{{i+1}}</td>
+          <td class="col-2 text-left">{{deg.qlfctnName}}</td>
+          <td class="col-3 text-left">{{deg.qlfctnCriteriaName}}</td>
+          <td class="col-4 text-left">{{deg.qlfctnCriteriaDesc}}</td>
+          <td class="col-1 text-right">
+            <i data-toggle="modal" data-target="#addSkillModal" (click)="edit(deg)"
+              class="pointerCursor fa fa-pencil text-primary" aria-hidden="true"></i>
+          </td>
+          <td class="col-1 text-left">
+            <i data-toggle="modal" data-target="#deleteModal" (click)="deleteSkillCriteria(deg)"
+              class="pointerCursor fa fa-trash text-danger" aria-hidden="true"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Pagination Starts -->
+    <div class="row tab-margin">
+      <div class="col-md-10">
+        <pagination-controls id="first" (pageChange)="p = $event"></pagination-controls>
+      </div>
+      <div class="col-md-2 text-right">
+        <mat-form-field class="fullwidth pagenateList">
+          <mat-select placeholder="Items Per Page" [(ngModel)]="itemPerPage">
+            <mat-option value="5">5</mat-option>
+            <mat-option value="10">10</mat-option>
+            <mat-option value="25">25</mat-option>
+            <mat-option value="50">50</mat-option>
+            <mat-option value="100">100</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <!-- Pagination Ends -->
+  </div>
+</div>
+<!-- Table Container Ends -->
+<br>
+
+
+<!-- Hidden Table for Print and PDF files starts-->
+<div class="container printArea" id="printArea" [hidden]=true>
+  <div class="printDiv">
+
+    <!--Start heading table -->
+    <table>
+      <tr>
+        <td width="15%" style="border:none;">
+          <img src="../../../assets/images/Ambit-Logo.svg" width="135px">
+        </td>
+
+        <td style="border:none;">
+          <div class="commonCss cssHeading">Infovative Solutions</div>
+          <div class="commonCss cssAddress">Office #209, 3rd Floor Anayat Plaza, G11 Markaz Islamabad.</div>
+          <div class="commonCss cssContact">Mobile: 0313-1234567, Ph. 051-5544661</div>
+        </td>
+      </tr>
+    </table>
+    <!--End heading table -->
+
+    <br /><br />
+
+    <!--Start table Row-->
+    <div class="row">
+      <table>
+        <thead>
+          <tr class="d-flex">
+            <th class="col-1 text-center">Sr. #</th>
+            <th>Skill Group </th>
+            <th>Skill Title </th>
+            <th>Title Description </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="d-flex"
+            *ngFor="let deg of skillCriteriaList | search:'qlfctnName,qlfctnCriteriaName,qlfctnCriteriaDesc' :tblSearch  let i=index">
+            <td class="col-1 text-center">{{i+1}}</td>
+            <td class="col-3 text-left">{{deg.qlfctnName}}</td>
+            <td class="col-4 text-left">{{deg.qlfctnCriteriaName}}</td>
+            <td class="col-4 text-left">{{deg.qlfctnCriteriaDesc}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- end table row -->
+  </div>
+</div>
+<!-- Hidden Table for Print and PDF files ends-->
+
+<!-- Hidden Table Starts for Excel and CSV files -->
+<!-- <igx-grid #excelDataContent [data]="excelDataList" [autoGenerate]="false" height="null" width="null" [hidden]="true">
+</igx-grid> -->
+<!-- Hidden Table Ends  for Excel and CSV files -->
+
+<!-- Add skill Modal Starts -->
+<div class="modal fade" id="addSkillModal">
+  <div class="modal-dialog shadow-lg-dark modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Skills</h5>
+        <div>
+          <button type="button" class="btn-ia cursorPointer text-right" (click)="saveSkillCriteria()"><span
+              class="fa fa-save"></span> &nbsp;Save</button>
+          <button type="button" class="btn-ia cursorPointer text-right" (click)="clear()"><span
+              class="fa fa-undo"></span> &nbsp;Reset</button>
+          <button type="button" class="btn-ia cursorPointer" data-dismiss="modal"><span
+              class="fa fa-times-circle"></span> &nbsp;Close</button>
+        </div>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <!-- Row 1 -->
+        <div class="row">
+          <div class="col-md-6">
+            <label><b>Skill Type</b></label>
+          </div>
+
+          <div class="col-md-5">
+            <label>{{skillTypeName}}</label>
+          </div>
+
+          <!-- hidden Id field -->
+          <div class="col-md-1">
+            <input matInput [(ngModel)]="skillId" [hidden]=true>
+          </div>
+        </div>
+        <!-- Row 2 -->
+        <div class="row">
+          <div class="col-md-9">
+            <mat-form-field class="fullwidth">
+              <mat-select [(ngModel)]="skillGroup" placeholder="Select Skill Group" required>
+                <mat-option *ngFor="let skill of skillGroupList" [value]="skill.qlfctnCd">
+                  {{skill.qlfctnName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <button mat-fab color="primary" class='noneOutLine' data-toggle="modal" data-target="#addSkillGroupModal"
+              (click)="clear()"><span class="fa fa-plus"></span></button>
+          </div>
+        </div>
+        <!-- Row 3 -->
+        <!-- <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput [(ngModel)]="skillGroupDescription" placeholder="skill Group Description">
+            </mat-form-field>
+          </div>
+        </div> -->
+        <!-- Row 4 -->
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput [(ngModel)]="skillTitle" placeholder="Skill Title" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Row 5 -->
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput [(ngModel)]="skillTitleDescription" placeholder="Skill Title Description" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <!--button tag Row Starts-->
+        <!-- <div class="row">
+          <div class="col-md-2 text-left">
+            <button mat-raised-button color="primary" (click)="saveSkillCriteria()">Save</button>
+          </div>
+          <div class="col-md-10 text-left">
+            <button mat-raised-button (click)="clear()">Reset</button>
+          </div>
+        </div> -->
+        <!-- Button tag Row Ends -->
+      </div>
+      <hr>
+      <br>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- Add skill Modal Ends -->
+
+
+<!-- Add skill Group Modal Starts -->
+<div class="modal fade" id="addSkillGroupModal">
+  <div class="modal-dialog shadow-lg-dark modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add skill Group</h5>
+        <div>
+          <button type="button" class="btn-ia cursorPointer text-right" (click)="saveSkillGroup()"><span
+              class="fa fa-save"></span> &nbsp;Save</button>
+          <button type="button" class="btn-ia cursorPointer text-right" (click)="clear()"><span
+              class="fa fa-undo"></span> &nbsp;Reset</button>
+          <button type="button" class="btn-ia cursorPointer" data-dismiss="modal"><span
+              class="fa fa-times-circle"></span> &nbsp;Close</button>
+        </div>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <!-- Row 1 -->
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput [(ngModel)]="sklGroupName" placeholder="Enter Skill Group" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Row 4 -->
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput [(ngModel)]="sklGroupDesc" placeholder="Enter Description" required
+                [disabled]="!sklGroupName">
+            </mat-form-field>
+          </div>
+        </div>
+        <!--button tag Row Starts-->
+        <br>
+
+        <div class="row">
+          <!-- <div class="col-md-2 text-left">
+            <button mat-raised-button color="primary" (click)="saveSkillGroup()">Save</button>
+          </div>
+          <div class="col-md-10 text-left">
+            <button mat-raised-button (click)="clear()">Reset</button>
+          </div> -->
+          <div class="col-md-12">
+            <h5>Saved Skill Groups</h5>
+          </div>
+        </div>
+        <!-- Button tag Row Ends -->
+      </div>
+
+      <!-- Table Container Starts -->
+      <div class="container-fluid bgWhite">
+        <!--Start search textbox Row-->
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput [(ngModel)]="tblSearchGroup" placeholder="Search">
+            </mat-form-field>
+            <i class="fab fa-accessible-icon"></i>
+          </div>
+        </div>
+        <!--end search textbox Row-->
+
+        <div class="row">
+          <table class="table table-striped bottomBorder">
+            <thead>
+              <tr class='d-flex'>
+                <th class="col-1 text-center">#</th>
+                <th class="col-3 text-left"> Group Name </th>
+                <th class="col-4 text-left"> Description </th>
+                <th class="col-4 text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class='d-flex'
+                *ngFor="let deg of skillGroupList | search:'qlfctnName,qlfctnDesc':tblSearchGroup | paginate: { itemsPerPage: itemPerPageGroup, currentPage: pGroup, id: 'second' } let i=index">
+                <td class="col-1 text-center">{{i+1}}</td>
+                <td class="col-3 text-left">{{deg.qlfctnName}}</td>
+                <td class="col-4 text-left">{{deg.qlfctnDesc}}</td>
+                <td class="col-2 text-right">
+                  <i data-toggle="modal" (click)="editGroup(deg)" class="pointerCursor fa fa-pencil text-primary"
+                    aria-hidden="true"></i>
+                </td>
+                <td class="col-2 text-left">
+                  <i data-toggle="modal" data-target="#deleteModal" (click)="deleteSkillGroup(deg)"
+                    class="pointerCursor fa fa-trash text-danger" aria-hidden="true"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Pagination Starts -->
+          <div class="col-md-9">
+            <pagination-controls id="second" (pageChange)="pGroup = $event"></pagination-controls>
+          </div>
+          <div class="col-md-3 text-right">
+            <mat-form-field class="fullwidth pagenateList">
+              <mat-select placeholder="Items Per Page" [(ngModel)]="itemPerPageGroup">
+                <mat-option value="5">5</mat-option>
+                <mat-option value="10">10</mat-option>
+                <mat-option value="25">25</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Pagination Ends -->
+        </div>
+      </div>
+      <!-- Table Container Ends -->
+      <br>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- Add skill Group Modal Ends -->
+
+
+<!-- Delete skill Modal Window Starts -->
+<div class="modal fade" id="deleteModal">
+  <div class="modal-dialog shadow-lg-dark modal-md">
+    <div class="modal-content">
+
+      <!--start Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Delete</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!--end Modal Header -->
+
+      <!--start Modal body -->
+      <div class="modal-body">
+        <!--start 1st row-->
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput [(ngModel)]="userPassword" type="password" placeholder="Enter Password" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <!--end 1st row-->
+        <br />
+        <!--start 2nd row-->
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput [(ngModel)]="userPINCode" type="password" placeholder="Enter PIN Code" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <!--end 2nd row-->
+        <br />
+        <!--button tag-->
+        <button mat-raised-button color="warn" (click)="delete()">Delete</button>
+      </div>
+      <!--end Modal body -->
+
+      <!--start Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+      <!--end Modal footer -->
+
+    </div>
+  </div>
+</div>
+<!-- Delete skill Modal Window Ends -->

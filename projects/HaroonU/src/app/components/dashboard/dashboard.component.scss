@@ -1,0 +1,52 @@
+.headingContainer {
+  left: 1em;
+  top: 1em;
+}
+
+.headingColor {
+  background-color: #3a48ab;
+  color: #ddd;
+  height: 100%;
+  padding-top: 2%;
+}
+
+.imgUserTrend {
+  // border: 1px solid black;
+  width: 95%;
+  right: 50%;
+  padding-top: 35%;
+  line-height: 1;
+  position: relative;
+  font-family: Roboto-Light;
+  // opacity: 0.5;
+  float: left;
+  background: url('../../../assets/images/UserTrend-Large.svg') no-repeat;
+  background-position-x: 40px;
+}
+
+.imgCalendar {
+  // border: 1px solid black;
+  width: 95%;
+  right: 50%;
+  padding-top: 35%;
+  line-height: 1;
+  position: relative;
+  font-family: Roboto-Light;
+  // opacity: 0.5;
+  float: left;
+  background: url('../../../assets/images/calendar.svg') no-repeat;
+  background-position-x: 40px;
+}
+
+.imgEditUser {
+  width: 50%;
+  right: 20%;
+  padding-top: 22%;
+  line-height: 1;
+  position: relative;
+  font-family: Roboto-Light;
+  opacity: 0.5;
+  float: left;
+  background: url('../../../assets/images/EditUser.svg') no-repeat;
+  background-position-x: 40px;
+}

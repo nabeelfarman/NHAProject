@@ -1,0 +1,82 @@
+.modal .modalCmpnyPro {
+    Border: 0px solid red;
+    width: 30%;
+    background-color: #5F84D5;
+}
+
+.btn-raised-ambit{
+    border: 1px solid #E5E5E5;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 3px 5px 3px 5px;
+    margin-bottom: 8px !important;
+    font-size: 14px;
+}
+
+.btn-raised-ambit:hover{
+    cursor: pointer;
+}
+
+hr{
+    padding: 0;
+    margin-top: 5px;
+    border-color: #949494;
+}
+
+.modal-body {
+    padding: 15px 25px 15px 25px;
+}
+
+h5{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.mainContainer{
+    border: 1px solid red;
+    width: 98% !important;
+    margin-left: 1% !important;
+    //overflow: hidden !important;
+    position:relative !important;
+}
+
+.mainContainer .commonPenalCls{
+    border: 0px solid green !important;
+    background-color: #fff;
+    padding: 25px 25px 15px 25px !important;
+    box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.1);
+    //box-shadow: 0px 0px 4px 3px rgba(237,237,237,1);
+    border-radius: 2px;
+    margin-bottom: 15px;
+    width: 28%;
+    position: relative;
+}
+
+
+.mainContainer .leftPanel{
+    position: relative;
+    display: inline;
+
+}
+
+.mainContainer .middalPanel{
+    position: relative;
+    left: 36%;
+    top: 0;
+}
+
+.mainContainer .rightPanel{
+    position: relative;
+    right: 0;
+    top: 0;
+}
+
+.innerContainer{
+    border: 1px solid red;
+    height: 30% !important;
+    overflow: scroll;
+    //overflow-x: hidden;
+    overflow: hidden !important;
+    position: relative;
+    display: block;
+}

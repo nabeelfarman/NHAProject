@@ -1,0 +1,37 @@
+<div class="m-5 allBorder minHeight84">
+  <div class="row bg-lighter-grey p-0 m-0">
+    <div class="col-md-3 m-auto">
+      <h4 class="center-block pt-0 ml-2">Organization Hierarchy</h4>
+    </div>
+    <div class="offset-md-5 col-md-4 text-center">
+      <mat-form-field class="fullwidth mt-3 my-form">
+        <mat-select disableOptionCentering class="my-form" placeholder="Select Company" [(ngModel)]="cmbCompany"
+          (ngModelChange)="getChartData($event)" required>
+          <mat-option *ngFor=" let item of company" [value]="item.companyId">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row bg-lighterer-grey p-0 m-0">
+    <div class="col-md-12 w-100 pt-4">
+      <div style="height: 510px; overflow-x: scroll;overflow-y: scroll;">
+        <!--ngprime organizational chart-->
+        <p-organizationChart [value]="data1" selectionMode="single" styleClass="company">
+          <ng-template let-node pTemplate="person">
+            <div class="node-header ui-corner-top">{{node.label}}</div>
+            <div class="node-content">
+              <img src="../../../assets/images/{{node.data.avatar}}" width="32">
+              <div>{{node.data.name}}</div>
+            </div>
+          </ng-template>
+          <ng-template let-node pTemplate="department">
+            {{node.label}}
+          </ng-template>
+        </p-organizationChart>
+        <!--ngprime organizational chart-->
+      </div>
+    </div>
+  </div>
+</div>

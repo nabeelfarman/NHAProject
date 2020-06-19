@@ -1,0 +1,10 @@
+p {
+  border-bottom: 1px solid #C2C2C2;
+}
+
+.innerContainer {
+  border: 0px solid red;
+  max-height: 80px;
+  overflow: scroll;
+  overflow-x: hidden;
+}

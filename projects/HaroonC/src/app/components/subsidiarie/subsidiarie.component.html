@@ -1,0 +1,630 @@
+<br />
+<!-- heading row -->
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h1>Subsidiaries</h1>
+  </div>
+</div>
+<!-- end heading row -->
+
+<!-- start menubar buttons -->
+<div class="topnav boxShadow">
+  <div class="container">
+    <a class="pointerCursor" data-toggle="modal" data-target="#subsidiaryModal" (click)="clear()">
+      <i class="fa fa-plus-square"></i>
+      Add New
+    </a>
+    <a class="pointerCursor" (click)="printDiv()">
+      <i class="fa fa-print"></i>
+      Print
+    </a>
+    <!-- <a class="pointerCursor" (click)="downloadPDF()">
+      <i class="fa fa-file-pdf-o"></i>
+      PDF
+    </a>
+    <a class="pointerCursor" (click)="downloadCSV()">
+      <i class="fa fa-file-text-o"></i>
+      CSV
+    </a>
+    <a class="pointerCursor" (click)="downloadExcel()">
+      <i class="fa fa-file-excel-o"></i>
+      Excel
+    </a> -->
+  </div>
+</div>
+<!-- end menubar buttons -->
+
+<br><br>
+
+
+
+<!-- Start Subsidary Table Container -->
+<div class="container ">
+  <br>
+  <!--Start search textbox Row-->
+  <div class="row">
+    <div class="col-md-12">
+      <mat-form-field class="fullwidth">
+        <input matInput [(ngModel)]="tblSearch" placeholder=" Search">
+      </mat-form-field>
+      <i class="fab fa-accessible-icon"></i>
+    </div>
+  </div>
+  <!--end search textbox Row-->
+
+  <!--Start table Row-->
+  <div class="row">
+    <table class="table table-striped fullwidth" id="myTable">
+      <thead>
+        <tr class="d-flex">
+          <th class="col-1 text-center">Sr No.</th>
+          <th [class.active]="order === 'subsidiaryTitle'" (click)="setOrder('subsidiaryTitle')"
+            class="col-3 pointerCursor">Subsidiary Title
+            <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+            <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+          </th>
+          <th [class.active]="order === 'subsidiaryType'" (click)="setOrder('subsidiaryType')"
+            class="col-2 pointerCursor">
+            Type
+            <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+            <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+          </th>
+          <th [class.active]="order === 'representator'" (click)="setOrder('representator')"
+            class="col-2 pointerCursor">
+            Representator
+            <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+            <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+          </th>
+          <th [class.active]="order === 'cityName'" (click)="setOrder('cityName')" class="col-2 pointerCursor">
+            City
+            <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+            <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+          </th>
+          <th class="col-2 text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of subsidiaryDetail | search:'subsidiaryTitle,subsidiaryType,representator,cityName' :tblSearch | paginate: { itemsPerPage: itemPerPage, currentPage: p } | orderBy: order:reverse:'case-insensitive' let i=index"
+          class='d-flex'>
+          <td class="col-1 text-center">{{i + 1}}</td>
+          <td class="col-3">{{item.subsidiaryTitle}}</td>
+          <td class="col-2">{{item.subsidiaryType}}</td>
+          <td class="col-2">{{item.representator}}</td>
+          <td class="col-2">{{item.cityName}}</td>
+          <td class="col-2 text-center">
+            <span class="fa fa-edit pointerCursor text-primary" data-toggle="modal" data-target="#subsidiaryModal"
+              (click)="edit(item)"></span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="fa fa-trash pointerCursor text-danger" data-toggle="modal" data-target="#deleteModal"
+              (click)="deleteTemp(item)"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination Starts -->
+    <div class="col-md-10">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+    <div class="col-md-2 text-right">
+      <mat-form-field class="fullwidth pagenateList">
+        <mat-select placeholder="Items Per Page" [(ngModel)]="itemPerPage">
+          <mat-option value="10">10</mat-option>
+          <mat-option value="15">15</mat-option>
+          <mat-option value="20">20</mat-option>
+          <mat-option value="25">25</mat-option>
+          <mat-option value="30">30</mat-option>
+          <mat-option value="35">35</mat-option>
+          <mat-option value="40">40</mat-option>
+          <mat-option value="45">45</mat-option>
+          <mat-option value="50">50</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- Pagination Ends -->
+  </div>
+  <!-- end table row -->
+  <br />
+</div>
+<!-- End Subsidary Table Container -->
+
+<!-- Hidden Table Starts for Excel and CSV files -->
+<!-- <igx-grid #excelDataContent [data]="excelDataList" [autoGenerate]="false" height="null" width="null" [hidden]="true">
+</igx-grid> -->
+<!-- Hidden Table Ends  for Excel and CSV files -->
+
+<!-- Hidden Table for Print and PDF files starts-->
+<div class="container printArea" id="printArea" #exportPDF>
+  <div class="printDiv">
+
+    <!--Start heading table -->
+    <table>
+      <tr>
+        <td width="15%" style="border:none;">
+          <img src="../../../assets/images/logo.png" width="135px">
+        </td>
+
+        <td style="border:none;">
+          <div class="commonCss cssHeading">Logix Solutions</div>
+          <div class="commonCss cssAddress">Office #209, 2nd Floor Ahmed Plaza, Rawalpindi Road Fateh Jang.</div>
+          <div class="commonCss cssContact">Mobile: 0313-5300471, Ph. 057-2212704</div>
+        </td>
+      </tr>
+    </table>
+    <!--End heading table -->
+
+    <br /><br />
+
+    <!--Start table Row-->
+    <div class="row">
+      <table>
+        <thead>
+          <tr class="d-flex">
+            <th class="col-1 text-center">Sr No.</th>
+            <th>Subsidiary Title</th>
+            <th>Type</th>
+            <th>Representator</th>
+            <th>City</th>
+            <th>Mobile</th>
+            <th>Website</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let item of subsidiaryDetail | search:'subsidiaryTitle,subsidiaryType,representator,cityName' :tblSearch let i=index"
+            class='d-flex'>
+            <td class="col-1 text-center">{{i + 1}}</td>
+            <td class="col-3">{{item.orgName}}</td>
+            <td class="col-2">{{item}}</td>
+            <td class="col-2">{{item}}</td>
+            <td class="col-2">{{item}}</td>
+            <td class="col-2">{{item}}</td>
+            <td class="col-2">{{item.orgWebsite}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- end table row -->
+  </div>
+</div>
+<!-- Hidden Table for Print and PDF files ends-->
+
+<br><br><br>
+
+<!-- Start Modal Window to delete data -->
+<div class="modal fade" id="deleteModal">
+  <div class="modal-dialog shadow-lg-dark">
+    <div class="modal-content">
+      <!--start delete user Modal body -->
+      <div class="modal-body">
+        <br>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2>Delete Currency</h2>
+            <!-- <h2 [(ngModel)]="userName">{{userName}}</h2> -->
+          </div>
+        </div><br />
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput placeholder="Enter Password" type="password" [(ngModel)]="txtdPassword">
+            </mat-form-field>
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput placeholder="Enter PIN" type="password" [(ngModel)]="txtdPin">
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <button mat-raised-button color="warn" (click)="delete()">Delete</button>
+          </div>
+        </div>
+        <br />
+      </div>
+      <!--end delete user Modal body -->
+
+      <!--start delete user Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="closeDeleteModel">Close</button>
+      </div>
+      <!--end delete user Modal footer -->
+
+    </div>
+  </div>
+</div>
+<!-- End Modal Window to delete data -->
+
+
+<!-- Start Subsidiary Modal Window -->
+<div class="modal fade" id="subsidiaryModal">
+  <div class="modal-dialog shadow-lg-dark modal-lg">
+    <div class="modal-content">
+
+      <!--start Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">New Subsidiary</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!--end Modal Header -->
+
+      <!--start Modal body -->
+      <div class="modal-body">
+
+        <!--start horizontal Stepper -->
+        <mat-horizontal-stepper linear>
+          <!--start 1st Step -->
+          <mat-step>
+            <!--stepper 1st label-->
+            <ng-template matStepLabel><b>Subsidiary</b></ng-template>
+            <!--start form control div-->
+
+            <!--start heading div-->
+            <div class="text-center">
+              <h4>Subsidiary Detail</h4>
+            </div>
+            <!--end heading div-->
+            <br />
+
+
+            <!--start 1st row-->
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="fullwidth">
+                  <input matInput placeholder="Subsidiary Title" [(ngModel)]="subsidiaryTitle" required>
+                </mat-form-field>
+              </div>
+            </div>
+            <!--end 1st row-->
+            <br />
+
+            <!-- start 2nd row -->
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="fullwidth">
+                  <input matInput placeholder="NTN" [(ngModel)]="ntn" mask="0000000-0" [showMaskTyped]="true" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field class="fullwidth">
+                  <input matInput placeholder="STRN" [(ngModel)]="strn" mask="000-000-000-0" [showMaskTyped]="true"
+                    required>
+                </mat-form-field>
+              </div>
+            </div><!-- end 2nd row -->
+            <br>
+
+            <!-- start 3rd row -->
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="fullwidth">
+                  <mat-select placeholder="Subsidiary Type" [(ngModel)]="cmbSubsidiaryType">
+                    <mat-option *ngFor="let item of businessTypeList" [value]="item.businessTypeCd">
+                      {{item.businessTypeName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field class="fullwidth">
+                  <input matInput placeholder="Website" [(ngModel)]="website" required>
+                </mat-form-field>
+              </div>
+            </div><!-- end 3rd row -->
+            <br />
+
+            <!--start 4th row-->
+            <div class="row">
+
+              <div class="col-md-6">
+                <mat-form-field class="fullwidth">
+                  <input matInput placeholder="Upload Agreement" [(ngModel)]="agreement" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <!-- <button mat-raised-button class="noneOutLine">...</button> -->
+                <button mat-fab><span class="fa fa-paperclip"></span></button>
+              </div>
+            </div>
+            <!--end 4th row-->
+            <br />
+
+
+
+
+
+
+
+            <!-- *________________Start Add Contacts Detail_____________________ -->
+            <div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <h6>Contact Info</h6>
+                </div>
+              </div>
+
+              <div *ngFor="let item of contactDetail; let i=index">
+                <div class="row">
+                  <table bordre="1">
+                    <tr>
+
+                      <!--contact type text box-->
+                      <td style="border: 0px solid red; padding:0 15px 0 15px; width: 200px;">
+                        <p-dropdown [options]="contactType" filter="true" [(ngModel)]="item.contactType"
+                          placeholder="Contact Type" (ngModelChange)="onContactChange($event, item)" required>
+                          <ng-template let-itm pTemplate="item">
+                            <div style="position: relative;height: 25px;">
+                              <div style="font-size:14px;float:left;margin-top:4px;">{{itm.label}}</div>
+                            </div>
+                          </ng-template>
+                        </p-dropdown>
+
+                      </td>
+
+                      <!-- Country code combo box-->
+                      <td style="border: 0px solid red; width: 150px;">
+
+                        <p-dropdown [options]="countryList" filter="true" [(ngModel)]="item.countryCode"
+                          placeholder="Country Code" required>
+                          <ng-template let-code pTemplate="item">
+                            <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                              <div style="font-size:14px;float:left;margin-top:4px">{{code.label}}</div>
+                            </div>
+                          </ng-template>
+                        </p-dropdown>
+
+                      </td>
+
+                      <!--Contact code combobox -->
+                      <td colspan="2" style="border: 0px solid red; width: 150px;">
+                        <input type="text" pInputText [(ngModel)]="item.contactNumber" placeholder="Number"
+                          mask="0000000000" style="width: 100%">
+                      </td>
+                      <!-- <td colspan="2" style="border: 0px solid red; width: 150px;" *ngIf="item.areaCode">
+                        <input type="text" pInputText [(ngModel)]="item.contactNumber" placeholder="Number"
+                          mask="00-0000000" style="width: 100%">
+                      </td>
+
+                      <td colspan="2" style="border: 0px solid red; width: 150px;" *ngIf="item.mobileCode">
+                        <input type="text" pInputText [(ngModel)]="item.mobileNumber" placeholder="Number"
+                          mask="000-0000000" style="width: 100%">
+                      </td> -->
+
+                      <!--Remove button -->
+                      <td style="border: 0px solid red; padding:0 0 5px 15px; width: 55px;">
+                        <button mat-fab color="warn" (click)="removeContact(i)">
+                          <span class="fa fa-minus"></span>
+                        </button>
+                      </td>
+
+
+                    </tr>
+                  </table>
+
+                </div>
+              </div>
+
+              <!--Add more Contact button-->
+              <div class="row">
+                <div class="col-md-3">
+                  <button mat-fab color="primary" (click)="addContact()">
+                    <span class="fa fa-plus"></span>
+                  </button>
+                </div>
+              </div>
+              <br />
+            </div>
+            <!-- *________________End Add Contacts Detail_____________________ -->
+
+
+
+            <!-- *________________Start Add Email Detail_____________________ -->
+            <div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <h6>Email Info</h6>
+                </div>
+              </div>
+
+
+              <div *ngFor="let item of emailDetail; let i=index">
+                <div class="row">
+                  <table>
+                    <tr>
+
+                      <!--address type combo box-->
+                      <td style="border: 0px solid red; padding:0 15px 0 15px; width: 200px;">
+                        <p-dropdown [options]="emailType" filter="true" [(ngModel)]="item.type" placeholder="Email Type"
+                          required>
+                          <ng-template let-itm pTemplate="item">
+                            <div style="position: relative;height: 25px;">
+                              <div style="font-size:14px;float:left;margin-top:4px;">{{itm.label}}</div>
+                            </div>
+                          </ng-template>
+                        </p-dropdown>
+
+                      </td>
+
+                      <!--address text box-->
+                      <td>
+                        <!-- [showMaskTyped]="true" required -->
+                        <input class="" type="text" pInputText [(ngModel)]="item.email" placeholder="Email"
+                          style="width: 100%;">
+                      </td>
+
+                      <td style="border: 0px solid red; padding:0 0 5px 15px; width: 55px;">
+                        <button mat-fab color="warn" (click)="removeEmail(i)">
+                          <span class="fa fa-minus"></span>
+                        </button>
+                      </td>
+
+                    </tr>
+                  </table>
+
+                </div>
+                <!-- Contact Table Ends -->
+
+                <!-- Contact Number Section Ends -->
+
+              </div>
+
+              <!--Add more email button-->
+              <div class="row">
+                <div class="col-md-3">
+                  <button mat-fab color="primary" (click)="addEmail()">
+                    <span class="fa fa-plus"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- *________________End Add Email Detail_____________________ -->
+
+
+            <br />
+            <!--button tag-->
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+            <!--end 2nd step form control div-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!--end form control div-->
+          </mat-step>
+          <!--end 1st Step -->
+
+
+          <!--start 2nd Step -->
+          <mat-step>
+            <!--stepper 2nd label-->
+            <ng-template matStepLabel><b>Representator</b></ng-template>
+            <!--start 2nd step form control div-->
+            <!--2nd step heading div-->
+            <div class="text-center">
+              <h4>Representator Info</h4>
+            </div>
+            <br />
+
+
+
+            <!--start 1st row-->
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="fullwidth">
+                  <input matInput placeholder="Representator Name" [(ngModel)]="representator" required>
+                </mat-form-field>
+              </div>
+            </div>
+            <!--end 1st row-->
+            <br />
+
+            <!--start 2nd row-->
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="fullwidth">
+                  <input matInput placeholder="Address" [(ngModel)]="repAddress" required>
+                </mat-form-field>
+              </div>
+            </div>
+            <!--end 2nd row-->
+            <br />
+
+            <!--start 3rd row-->
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="fullwidth">
+                  <input matInput placeholder="Mobile No." [(ngModel)]="repMobile" mask="0000-0000000" required>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field class="fullwidth">
+                  <input matInput placeholder="Email Address" [(ngModel)]="repEmail" required>
+                </mat-form-field>
+              </div>
+            </div>
+            <!--end 3rd row-->
+            <br />
+
+            <!--button tag-->
+            <button mat-raised-button color="primary" (click)="save()">Save</button>
+            &nbsp;&nbsp;&nbsp;
+            <button mat-raised-button (click)="clear()">Reset</button>
+
+          </mat-step>
+          <!--end 2nd Step -->
+
+        </mat-horizontal-stepper>
+        <!--end horizontal Stepper -->
+
+
+      </div>
+      <!--end Modal body -->
+
+
+      <!--start Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+      <!--end Modal footer -->
+
+    </div>
+  </div>
+</div>
+<!-- End Subsidiary Modal Window  -->
+
+
+<!-- Start add Section Modal Window -->
+<div class="modal fade" id="cityModal">
+  <div class="modal-dialog shadow-lg-dark modal-md">
+    <div class="modal-content">
+
+      <!--start Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add City</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!--end Modal Header -->
+
+      <!--start Modal body -->
+      <div class="modal-body">
+        <!--start 1st row-->
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput placeholder="City Name" [(ngModel)]="cityName" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <!--end 1st row-->
+        <br />
+        <!--button tag-->
+        <button mat-raised-button color="primary">Save</button>
+      </div>
+      <!--end Modal body -->
+
+      <!--start Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="addCityModel">Close</button>
+      </div>
+      <!--end Modal footer -->
+
+    </div>
+  </div>
+</div>
+<!-- End add Section Modal Window  -->

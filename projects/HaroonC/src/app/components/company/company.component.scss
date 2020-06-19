@@ -1,0 +1,54 @@
+.modal .modalCmpnyPro {
+    Border: 0px solid red;
+    width: 35%;
+    background-color: #5F84D5;
+}
+
+.btn-raised-ambit{
+    border: 1px solid #E5E5E5;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 3px 5px 3px 5px;
+    margin-bottom: 8px !important;
+    font-size: 14px;
+}
+
+.btn-raised-ambit:hover{
+    cursor: pointer;
+}
+
+hr{
+    padding: 0;
+    margin-top: 5px;
+    border-color: #949494;
+}
+
+.modal-body {
+    padding: 15px 25px 15px 25px;
+}
+
+h5{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.innerContainer{
+    border: 0px solid red;
+    max-height: 80px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.commonPenalCls{
+    border: 0px solid green !important;
+    background-color: #fff;
+    padding: 25px 20px 15px 20px !important;
+    box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.1);
+    //box-shadow: 0px 0px 4px 3px rgba(237,237,237,1);
+    border-radius: 2px;
+    margin-bottom: 15px;
+}
+
+p{
+    border-bottom: 1px solid #C2C2C2;
+}
