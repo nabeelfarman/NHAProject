@@ -35,7 +35,7 @@
     "chart.js": "^2.9.3",
     "font-awesome": "^4.7.0",
     "fullcalendar": "^4.0.0-alpha",
-    "highcharts": "^6.2.0",
+    "highcharts": "^9.0.0",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
     "ng-circle-progress": "^1.5.1",
